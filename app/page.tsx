@@ -81,12 +81,12 @@ export default function HomePage() {
             </a>
           </div>
           <div className="relative flex-1">
-            <div className="relative mx-auto aspect-[4/3] w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl">
+            <div className="relative mx-auto aspect-[4/3] w-full max-w-2xl overflow-hidden rounded-2xl shadow-2xl">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero%20Banner-LIxmb6nzHRtV7xX7ztmNNUjfEDBeNy.jpg"
                 alt="Dr. Gustavo Paredes and the Paredes Medical team"
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
               />
             </div>
