@@ -86,7 +86,7 @@ export default function HomePage() {
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero%20Banner-LIxmb6nzHRtV7xX7ztmNNUjfEDBeNy.jpg"
                 alt="Dr. Gustavo Paredes and the Paredes Medical team"
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
               />
             </div>
