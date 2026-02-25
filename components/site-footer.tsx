@@ -133,6 +133,14 @@ export function SiteFooter() {
             <Link href="/hipaa" className="transition-colors hover:text-brand-warm-white">
               {t("HIPAA Notice", "Aviso HIPAA")}
             </Link>
+            <a
+              href="https://abysstech.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-brand-warm-white"
+            >
+              {t("Powered by Abyss Tech", "Powered by Abyss Tech")}
+            </a>
           </div>
         </div>
       </div>
