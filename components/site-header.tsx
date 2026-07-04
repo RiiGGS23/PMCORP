@@ -75,9 +75,9 @@ export function SiteHeader() {
           {/* Logo */}
           <Link href="/" className="flex shrink-0 items-center gap-3">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-cWbg1C1VE2QyToXr7Gw7aY7C3ZC6X1.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image-2-ibSP0N49cxu8BCwkukgSHX4euXwsrn.jpeg"
               alt="Paredes Medical Corporation logo"
-              width={220}
+              width={60}
               height={60}
               className="h-12 w-auto md:h-14"
               priority
