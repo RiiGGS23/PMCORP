@@ -39,10 +39,12 @@ export default function HomePage() {
               <Award className="h-4 w-4" />
               {t("2025 Coachella Valley New Business of the Year", "Negocio Nuevo del Ano 2025 del Valle de Coachella")}
             </div>
-            <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-brand-warm-white md:text-5xl lg:text-6xl">
-              {t("Care and Compassion", "Cuidado y Compasion")}
-              <span className="block text-brand-teal">{t("You Deserve", "Que Usted Merece")}</span>
+            <h1 className="text-balance text-5xl font-bold leading-tight tracking-tight text-brand-warm-white md:text-6xl lg:text-7xl">
+              {t("PAREDES MEDICAL CORPORATION", "PAREDES MEDICAL CORPORATION")}
             </h1>
+            <h2 className="text-balance text-2xl font-semibold text-brand-teal md:text-3xl">
+              {t("Care and Compassion You Deserve", "Cuidado y Compasion Que Usted Merece")}
+            </h2>
             <p className="max-w-lg text-lg leading-relaxed text-brand-warm-white/70">
               {t(
                 "Bilingual family medicine for the Coachella Valley. Dr. Gustavo Paredes and our caring team are here for your whole family.",
