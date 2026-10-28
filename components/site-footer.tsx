@@ -2,8 +2,9 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Phone, Mail, MapPin, Clock, Instagram } from "lucide-react"
+import { Phone, Mail, MapPin, Clock, Instagram, Star } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { SITE } from "@/lib/site"
 
 export function SiteFooter() {
   const { t } = useLanguage()
@@ -28,14 +29,24 @@ export function SiteFooter() {
               )}
             </p>
             <a
-              href="https://www.instagram.com/paredesmedical?igsh=MzRlODBiNWFlZA%3D%3D"
+              href={SITE.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-brand-warm-white/70 transition-colors hover:text-brand-teal"
               aria-label="Instagram"
             >
               <Instagram className="h-5 w-5" />
-              @paredesmedical
+              {SITE.instagramHandle}
+            </a>
+            <a
+              href={SITE.yelp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-brand-warm-white/70 transition-colors hover:text-brand-teal"
+              aria-label="Yelp"
+            >
+              <Star className="h-5 w-5" />
+              {t("Find us on Yelp", "Encuentrenos en Yelp")}
             </a>
           </div>
 
@@ -74,7 +85,7 @@ export function SiteFooter() {
             <ul className="flex flex-col gap-3">
               <li>
                 <a
-                  href="tel:7609724704"
+                  href={SITE.phoneHref}
                   className="flex items-start gap-2.5 text-sm text-brand-warm-white/70 transition-colors hover:text-brand-warm-white"
                 >
                   <Phone className="mt-0.5 h-4 w-4 shrink-0" />
@@ -82,23 +93,20 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <a
-                  href="mailto:customerservice@pmcorp.org"
-                  className="flex items-start gap-2.5 text-sm text-brand-warm-white/70 transition-colors hover:text-brand-warm-white"
-                >
+                <span className="flex items-start gap-2.5 text-sm text-brand-warm-white/70">
                   <Mail className="mt-0.5 h-4 w-4 shrink-0" />
-                  customerservice@pmcorp.org
-                </a>
+                  {SITE.email}
+                </span>
               </li>
               <li>
                 <a
-                  href="https://maps.google.com/?q=49201+Grapefruit+Blvd+Suite+3+Coachella+CA+92236"
+                  href={SITE.mapsHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-2.5 text-sm text-brand-warm-white/70 transition-colors hover:text-brand-warm-white"
                 >
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                  49201 Grapefruit Blvd, Suite #3, Coachella, CA 92236
+                  {SITE.addressFull}
                 </a>
               </li>
             </ul>

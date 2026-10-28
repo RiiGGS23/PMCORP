@@ -5,6 +5,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { Phone, Menu, X } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 
 const navItems = [
@@ -30,11 +31,11 @@ export function SiteHeader() {
           <div className="hidden items-center gap-4 md:flex">
             <span>{t("Mon - Fri: 8:00 AM - 5:00 PM", "Lun - Vie: 8:00 AM - 5:00 PM")}</span>
             <span className="text-brand-warm-white/40">|</span>
-            <span>49201 Grapefruit Blvd, Suite #3, Coachella, CA 92236</span>
+            <span>{SITE.addressFull}</span>
           </div>
           <div className="flex w-full items-center justify-between gap-4 md:w-auto md:justify-end">
             <a
-              href="tel:7609724704"
+              href={SITE.phoneHref}
               className="flex items-center gap-1.5 font-semibold text-brand-warm-white transition-colors hover:text-brand-teal"
             >
               <Phone className="h-3.5 w-3.5" />
@@ -103,7 +104,7 @@ export function SiteHeader() {
               asChild
               className="hidden bg-brand-red text-destructive-foreground hover:bg-brand-red/90 sm:inline-flex"
             >
-              <a href="tel:7609724704">
+              <a href={SITE.phoneHref}>
                 <Phone className="mr-2 h-4 w-4" />
                 {t("Call to Schedule", "Llamar para Agendar")}
               </a>
@@ -133,7 +134,7 @@ export function SiteHeader() {
             ))}
             <div className="mt-3 border-t border-border pt-3">
               <Button asChild className="w-full bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
-                <a href="tel:7609724704">
+                <a href={SITE.phoneHref}>
                   <Phone className="mr-2 h-4 w-4" />
                   {t("Call to Schedule", "Llamar para Agendar")}
                 </a>

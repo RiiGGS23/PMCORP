@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Phone, GraduationCap, Award, Stethoscope, Globe, ArrowRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 
 export default function DoctorPage() {
@@ -48,14 +49,20 @@ export default function DoctorPage() {
             </div>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Dr. Gustavo A. Paredes is a board-certified family medicine physician with over 30 years of clinical experience. He has dedicated his career to serving underserved communities, with a special focus on the families of the Coachella Valley.",
-                "El Dr. Gustavo A. Paredes es un medico de medicina familiar certificado por la junta con mas de 30 anos de experiencia clinica. Ha dedicado su carrera a servir a comunidades desatendidas, con un enfoque especial en las familias del Valle de Coachella."
+                "Patient satisfaction is at the heart of Dr. Gustavo Paredes' practice. He takes immense pride in his ability to connect with people from a wide range of backgrounds and often finds himself working with some of the most vulnerable members of the community. He finds joy in getting to know his patients and is dedicated to developing a strong patient-doctor partnership. Dr. Paredes treats everyone with the same level of care and respect that he would extend to his own family.",
+                "La satisfaccion del paciente es el centro de la practica del Dr. Gustavo Paredes. Se enorgullece de su capacidad para conectar con personas de una gran variedad de origenes y con frecuencia trabaja con algunos de los miembros mas vulnerables de la comunidad. Disfruta conocer a sus pacientes y esta dedicado a desarrollar una relacion solida entre paciente y medico. El Dr. Paredes trata a todos con el mismo nivel de cuidado y respeto que le daria a su propia familia."
               )}
             </p>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Fluent in both English and Spanish, Dr. Paredes believes in building lasting relationships with his patients. He takes the time to listen, educate, and create personalized treatment plans that respect each patient's unique needs and cultural background.",
-                "Fluido en ingles y espanol, el Dr. Paredes cree en construir relaciones duraderas con sus pacientes. Se toma el tiempo para escuchar, educar y crear planes de tratamiento personalizados que respetan las necesidades unicas y el trasfondo cultural de cada paciente."
+                "Dr. Paredes has over 30 years of experience in the medical field. He is a board-certified Family Medicine physician. He earned his medical degree from San Carlos University in Guatemala City, Guatemala. His Family Medicine specialty was completed at Bella Vista Hospital in Mayagüez, Puerto Rico. In addition, he completed a fellowship in Geriatrics from the University of Puerto Rico (UPR) / Veterans Affairs Caribbean Healthcare System (VACHS) in San Juan, Puerto Rico.",
+                "El Dr. Paredes tiene mas de 30 anos de experiencia en el campo de la medicina. Es medico certificado en Medicina Familiar. Obtuvo su titulo de medico en la Universidad de San Carlos en la Ciudad de Guatemala, Guatemala. Completo su especialidad en Medicina Familiar en el Hospital Bella Vista en Mayagüez, Puerto Rico. Ademas, completo una subespecialidad (fellowship) en Geriatria en la Universidad de Puerto Rico (UPR) / Sistema de Salud del Caribe de Asuntos de Veteranos (VACHS) en San Juan, Puerto Rico."
+              )}
+            </p>
+            <p className="leading-relaxed text-muted-foreground">
+              {t(
+                "Early in his career, he worked for the USC General Clinical Research Center (GCRC), which conducted research into the genetics and prevention of diabetes in the Hispanic American community. He moved to the Coachella Valley over 7 years ago and has happily served our community since then.",
+                "Al inicio de su carrera, trabajo en el Centro General de Investigacion Clinica de USC (GCRC), que investigaba la genetica y la prevencion de la diabetes en la comunidad hispanoamericana. Se mudo al Valle de Coachella hace mas de 7 anos y desde entonces ha servido con gusto a nuestra comunidad."
               )}
             </p>
 
@@ -64,18 +71,23 @@ export default function DoctorPage() {
               {[
                 {
                   icon: GraduationCap,
-                  en: "Medical Degree: Universidad Autonoma de Guadalajara",
-                  es: "Titulo Medico: Universidad Autonoma de Guadalajara",
+                  en: "Medical Degree: San Carlos University, Guatemala City, Guatemala",
+                  es: "Titulo de Medico: Universidad de San Carlos, Ciudad de Guatemala, Guatemala",
                 },
                 {
                   icon: Stethoscope,
-                  en: "Residency: Family Medicine",
-                  es: "Residencia: Medicina Familiar",
+                  en: "Family Medicine Residency: Bella Vista Hospital, Mayagüez, Puerto Rico",
+                  es: "Residencia en Medicina Familiar: Hospital Bella Vista, Mayagüez, Puerto Rico",
                 },
                 {
                   icon: Award,
-                  en: "Board Certified: American Board of Family Medicine",
-                  es: "Certificacion: Junta Americana de Medicina Familiar",
+                  en: "Geriatrics Fellowship: University of Puerto Rico (UPR) / VA Caribbean Healthcare System (VACHS), San Juan",
+                  es: "Fellowship en Geriatria: Universidad de Puerto Rico (UPR) / VA Caribbean Healthcare System (VACHS), San Juan",
+                },
+                {
+                  icon: Award,
+                  en: "Board-Certified in Family Medicine",
+                  es: "Certificado en Medicina Familiar",
                 },
                 {
                   icon: Globe,
@@ -95,9 +107,9 @@ export default function DoctorPage() {
                 asChild
                 className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90"
               >
-                <a href="tel:7609724704">
+                <a href={SITE.phoneHref}>
                   <Phone className="mr-2 h-4 w-4" />
-                  {t("Schedule with Dr. Paredes", "Agendar con el Dr. Paredes")}
+                  {t("Call to Schedule with Dr. Paredes", "Llame para Agendar con el Dr. Paredes")}
                 </a>
               </Button>
               <Button asChild variant="outline" className="border-brand-navy text-brand-navy hover:bg-brand-navy/5">
@@ -111,19 +123,18 @@ export default function DoctorPage() {
         </div>
       </section>
 
-      {/* Philosophy */}
+      {/* Philosophy (from paredesmedicalcorp.com) */}
       <section className="bg-secondary">
         <div className="mx-auto max-w-4xl px-4 py-16 text-center md:py-20">
           <h2 className="mb-6 text-3xl font-bold text-brand-navy">
-            {t("Care Philosophy", "Filosofia de Atencion")}
+            {t("Prevention Is the Best Medicine", "La Prevencion Es la Mejor Medicina")}
           </h2>
-          <blockquote className="text-xl leading-relaxed text-muted-foreground italic">
-            {`"${t(
-              "I believe that good medicine starts with truly knowing your patient. When we take the time to listen and understand, we can provide care that not only heals the body, but also nurtures the spirit. Every patient who walks through our doors is family.",
-              "Creo que la buena medicina comienza con conocer verdaderamente a tu paciente. Cuando nos tomamos el tiempo para escuchar y entender, podemos brindar atencion que no solo sana el cuerpo, sino que tambien nutre el espiritu. Cada paciente que cruza nuestras puertas es familia."
-            )}"`}
-          </blockquote>
-          <p className="mt-6 font-semibold text-brand-navy">-- Dr. Gustavo A. Paredes, MD</p>
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            {t(
+              "Dr. Paredes is a firm believer in the idea that \"prevention is the best medicine,\" and he makes it a point to share this important message with all his patients. For Dr. Paredes, the real reward comes from seeing the positive changes in his patients' lives. His goal is to always support them on their health journey, ensuring they feel cared for every step of the way.",
+              "El Dr. Paredes cree firmemente que \"la prevencion es la mejor medicina\", y se asegura de compartir este importante mensaje con todos sus pacientes. Para el Dr. Paredes, la verdadera recompensa es ver los cambios positivos en la vida de sus pacientes. Su meta es siempre apoyarlos en su camino hacia la salud, asegurando que se sientan atendidos en cada paso."
+            )}
+          </p>
         </div>
       </section>
     </div>

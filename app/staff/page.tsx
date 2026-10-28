@@ -1,73 +1,83 @@
 "use client"
 
-import { Phone, Heart } from "lucide-react"
+import { Phone } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
+// Staff names, titles, and bios come from paredesmedicalcorp.com/meet-our-staff.
+// No real photos are available yet, so each card shows an initials avatar.
 const staffMembers = [
   {
-    name: "Dr. Gustavo A. Paredes, MD",
-    roleEn: "Physician / Founder",
-    roleEs: "Medico / Fundador",
+    name: "Dr. Gustavo Paredes",
+    initials: "GP",
+    roleEn: "President / CEO",
+    roleEs: "Presidente / Director General",
     bioEn:
-      "Board-certified family medicine physician with over 30 years of experience. Dr. Paredes leads our practice with compassion and dedication to the community.",
+      "Dr. Paredes has over 30 years of experience in the medical field. He is a board-certified Family Medicine physician. Patient satisfaction is at the heart of his practice, and he treats everyone with the same level of care and respect that he would extend to his own family.",
     bioEs:
-      "Medico de medicina familiar certificado con mas de 30 anos de experiencia. El Dr. Paredes dirige nuestra practica con compasion y dedicacion a la comunidad.",
+      "El Dr. Paredes tiene mas de 30 anos de experiencia en el campo de la medicina. Es medico certificado en Medicina Familiar. La satisfaccion del paciente es el centro de su practica, y trata a todos con el mismo nivel de cuidado y respeto que le daria a su propia familia.",
   },
   {
-    name: "Jessica",
+    name: "Diana Fuentes",
+    initials: "DF",
+    roleEn: "Receptionist / Scheduler",
+    roleEs: "Recepcionista / Programadora de Citas",
+    bioEn:
+      "Hi, my name is Diana. I am originally from Mexicali, B.C., Mexico. I have 14 years of experience in customer service. I will be happy to receive you and schedule your appointments.",
+    bioEs:
+      "Hola, mi nombre es Diana. Soy originaria de Mexicali, B.C., Mexico. Tengo 14 anos de experiencia en servicio al cliente. Con gusto le recibire y programare sus citas.",
+  },
+  {
+    name: "Idalia Corral",
+    initials: "IC",
     roleEn: "Office Manager",
     roleEs: "Gerente de Oficina",
     bioEn:
-      "Jessica keeps our office running smoothly every day. She ensures that every patient visit is well-coordinated and that our team has the support they need.",
+      "Hi, my name is Idalia. I was born in Mexico but grew up in Indio, CA. I've spent the last 36 years working in the medical field, and what I enjoy most is helping our patients. In my free time, I love being with my grandchildren, which brings me immense joy!",
     bioEs:
-      "Jessica mantiene nuestra oficina funcionando sin problemas todos los dias. Se asegura de que cada visita de paciente este bien coordinada.",
+      "Hola, mi nombre es Idalia. Naci en Mexico pero creci en Indio, CA. He pasado los ultimos 36 anos trabajando en el campo de la medicina, y lo que mas disfruto es ayudar a nuestros pacientes. En mi tiempo libre, me encanta estar con mis nietos, lo cual me trae una inmensa alegria!",
   },
   {
-    name: "Brenda",
-    roleEn: "Medical Assistant",
-    roleEs: "Asistente Medica",
+    name: "Leticia Arrellano",
+    initials: "LA",
+    roleEn: "Certified Medical Assistant",
+    roleEs: "Asistente Medica Certificada",
     bioEn:
-      "Brenda is a dedicated medical assistant who is passionate about patient care. A Coachella Valley native, she brings warmth and professionalism to every interaction.",
+      "Hi, my name is Leticia. I was raised in Zacatecas, Mexico and have been working in the medical field for 22 years. I love my job because it is incredibly rewarding, and I enjoy helping others. I also have a passion for animals and love horseback riding.",
     bioEs:
-      "Brenda es una asistente medica dedicada y apasionada por el cuidado del paciente. Nacida en el Valle de Coachella, aporta calidez y profesionalismo a cada interaccion.",
+      "Hola, mi nombre es Leticia. Creci en Zacatecas, Mexico y he trabajado en el campo de la medicina por 22 anos. Me encanta mi trabajo porque es increiblemente gratificante, y disfruto ayudar a los demas. Tambien me apasionan los animales y me encanta montar a caballo.",
   },
   {
-    name: "Marlene",
-    roleEn: "Medical Assistant",
-    roleEs: "Asistente Medica",
+    name: "Carolina Arriaga",
+    initials: "CA",
+    roleEn: "Certified Medical Assistant",
+    roleEs: "Asistente Medica Certificada",
     bioEn:
-      "Marlene brings her caring nature and attention to detail to every appointment. She makes patients feel comfortable and cared for from the moment they arrive.",
+      "Hi, my name is Carolina and I'm originally from Mexicali, Baja California, Mexico. I have three years of experience in the medical field and what I enjoy most about my job is patient care—getting to know our patients and building relationships with them. I also love our work environment. In my spare time, I cherish quality moments with my kids. We enjoy going to the park, watching movies, and dining out together.",
     bioEs:
-      "Marlene aporta su naturaleza cariñosa y atencion al detalle a cada cita. Hace que los pacientes se sientan comodos y cuidados desde el momento en que llegan.",
+      "Hola, mi nombre es Carolina y soy originaria de Mexicali, Baja California, Mexico. Tengo tres anos de experiencia en el campo de la medicina y lo que mas disfruto de mi trabajo es la atencion al paciente: conocer a nuestros pacientes y construir relaciones con ellos. Tambien me encanta nuestro ambiente de trabajo. En mi tiempo libre, valoro los momentos de calidad con mis hijos. Disfrutamos ir al parque, ver peliculas y salir a comer juntos.",
   },
   {
-    name: "Vanessa",
-    roleEn: "Receptionist",
-    roleEs: "Recepcionista",
+    name: "Elizabeth Vargas",
+    initials: "EV",
+    roleEn: "Certified Medical Assistant",
+    roleEs: "Asistente Medica Certificada",
     bioEn:
-      "Vanessa is the friendly face that greets you when you walk through our door. She is fluent in English and Spanish and helps patients navigate scheduling and paperwork.",
+      "Hi, my name is Elizabeth. I was born and raised in the Coachella Valley, and I have been in the medical field as a Medical Assistant for 26 years. My passion for working in healthcare has allowed me to make a difference in people's lives every day by being on the front lines of patient care and contributing to their well-being. In my spare time, I enjoy assisting with my 7-year-old daughter's soccer club as a team mom. I enjoy cooking and spending time with my family.",
     bioEs:
-      "Vanessa es la cara amigable que te recibe cuando entras por nuestra puerta. Es bilingue y ayuda a los pacientes con citas y documentacion.",
+      "Hola, mi nombre es Elizabeth. Naci y creci en el Valle de Coachella, y he trabajado en el campo de la medicina como Asistente Medica por 26 anos. Mi pasion por trabajar en el cuidado de la salud me ha permitido hacer una diferencia en la vida de las personas cada dia, estando en la primera linea de la atencion al paciente y contribuyendo a su bienestar. En mi tiempo libre, disfruto ayudar en el club de futbol de mi hija de 7 anos como mama del equipo. Disfruto cocinar y pasar tiempo con mi familia.",
   },
   {
-    name: "Sandra",
-    roleEn: "Medical Assistant",
-    roleEs: "Asistente Medica",
+    name: "Diana Paredes",
+    initials: "DP",
+    roleEn: "Administrator",
+    roleEs: "Administradora",
     bioEn:
-      "Sandra is committed to delivering quality care with a gentle touch. Her experience and empathy make her an invaluable member of our medical team.",
+      "Hi, my name is Diana. I was born and raised in the San Gabriel Valley and moved to the Coachella Valley nearly 10 years ago. As the Administrator, I'm the newest member of the Paredes Medical team, and I couldn't be happier to be part of such a dedicated group of professionals committed to providing exceptional healthcare to our local community. We are passionate about our patients' health and strive to treat everyone with the same love and compassion we would offer our own families. In my spare time, my family and I volunteer at our local church, and I love listening to music, reading, traveling, and enjoying nature!",
     bioEs:
-      "Sandra esta comprometida a brindar atencion de calidad con un toque gentil. Su experiencia y empatia la convierten en un miembro invaluable de nuestro equipo.",
-  },
-  {
-    name: "Diana",
-    roleEn: "Receptionist / Billing",
-    roleEs: "Recepcionista / Facturacion",
-    bioEn:
-      "Diana handles front desk operations and billing with a friendly smile. She helps patients understand their insurance and payment options with patience and care.",
-    bioEs:
-      "Diana maneja las operaciones de recepcion y facturacion con una sonrisa amigable. Ayuda a los pacientes a entender su seguro y opciones de pago con paciencia.",
+      "Hola, mi nombre es Diana. Naci y creci en el Valle de San Gabriel y me mude al Valle de Coachella hace casi 10 anos. Como Administradora, soy el miembro mas reciente del equipo de Paredes Medical, y no podria estar mas feliz de ser parte de un grupo de profesionales tan dedicados y comprometidos a brindar una atencion medica excepcional a nuestra comunidad local. Nos apasiona la salud de nuestros pacientes y nos esforzamos por tratar a todos con el mismo amor y compasion que le ofreceriamos a nuestras propias familias. En mi tiempo libre, mi familia y yo somos voluntarios en nuestra iglesia local, y me encanta escuchar musica, leer, viajar y disfrutar de la naturaleza!",
   },
 ]
 
@@ -95,11 +105,14 @@ export default function StaffPage() {
       <section className="bg-background">
         <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {staffMembers.map((member, i) => (
-              <Card key={i} className="overflow-hidden border-0 shadow-sm transition-shadow hover:shadow-md">
-                <div className="flex h-48 items-center justify-center bg-secondary">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-brand-teal/10">
-                    <Heart className="h-8 w-8 text-brand-teal" />
+            {staffMembers.map((member) => (
+              <Card key={member.name} className="overflow-hidden border-0 shadow-sm transition-shadow hover:shadow-md">
+                <div className="flex h-40 items-center justify-center bg-secondary">
+                  <div
+                    className="flex h-24 w-24 items-center justify-center rounded-full bg-brand-teal/15 text-2xl font-bold tracking-wide text-brand-navy"
+                    aria-hidden="true"
+                  >
+                    {member.initials}
                   </div>
                 </div>
                 <CardContent className="p-6">
@@ -125,14 +138,14 @@ export default function StaffPage() {
           </h2>
           <p className="max-w-xl text-accent-foreground/80">
             {t(
-              "Our team is ready to welcome you. Call today to schedule your appointment.",
-              "Nuestro equipo esta listo para recibirlo. Llame hoy para agendar su cita."
+              "Call our office to schedule your appointment.",
+              "Llame a nuestra oficina para agendar su cita."
             )}
           </p>
           <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
-            <a href="tel:7609724704">
+            <a href={SITE.phoneHref}>
               <Phone className="mr-2 h-5 w-5" />
-              {t("Call to Schedule", "Llamar para Agendar")}
+              {t("Call to Schedule", "Llamar para Agendar")} {SITE.phoneDisplay}
             </a>
           </Button>
         </div>

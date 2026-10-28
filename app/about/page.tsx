@@ -2,8 +2,9 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Phone, Heart, Users, Award, ArrowRight } from "lucide-react"
+import { Phone, ArrowRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 
 export default function AboutPage() {
@@ -19,8 +20,8 @@ export default function AboutPage() {
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/70">
             {t(
-              "Dedicated to compassionate, bilingual healthcare for the Coachella Valley community.",
-              "Dedicados a la atencion medica bilingue y compasiva para la comunidad del Valle de Coachella."
+              "The medical office of Dr. Gustavo Paredes in Coachella, CA.",
+              "El consultorio medico del Dr. Gustavo Paredes en Coachella, CA."
             )}
           </p>
         </div>
@@ -43,72 +44,42 @@ export default function AboutPage() {
             </p>
             <h2 className="text-balance text-3xl font-bold text-brand-navy md:text-4xl">
               {t(
-                "Healthcare That Feels Like Family",
-                "Atencion Medica Que Se Siente Como Familia"
+                "Professional Care You Can Trust",
+                "Atencion Profesional en la Que Puede Confiar"
               )}
             </h2>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "At Paredes Medical Corporation, our mission is simple: to provide the highest quality healthcare in a warm, welcoming, and bilingual environment. We believe every patient deserves to be heard, respected, and treated with genuine compassion.",
-                "En Paredes Medical Corporation, nuestra mision es simple: brindar la mas alta calidad de atencion medica en un ambiente calido, acogedor y bilingue. Creemos que cada paciente merece ser escuchado, respetado y tratado con compasion genuina."
+                "Welcome to Paredes Medical, the medical office of Dr. Gustavo Paredes, where we believe that every patient deserves exceptional healthcare. Our mission is to provide comprehensive medical services with the genuine care and compassion every patient deserves, as though they were members of our own family.",
+                "Bienvenido a Paredes Medical, el consultorio medico del Dr. Gustavo Paredes, donde creemos que cada paciente merece una atencion medica excepcional. Nuestra mision es brindar servicios medicos integrales con el cuidado y la compasion genuinos que cada paciente merece, como si fueran miembros de nuestra propia familia."
               )}
             </p>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Founded by Dr. Gustavo A. Paredes, MD, our practice was built to serve the diverse families of the Coachella Valley. Many of our team members are from the local community, and we take pride in offering care that is culturally sensitive and language-accessible.",
-                "Fundada por el Dr. Gustavo A. Paredes, MD, nuestra practica fue construida para servir a las diversas familias del Valle de Coachella. Muchos de nuestros miembros del equipo son de la comunidad local, y nos enorgullecemos de ofrecer atencion que es culturalmente sensible y accesible en idioma."
+                "We understand that navigating the healthcare system can be challenging, especially when language barriers exist. That is why we are proud to offer our services in both English and Spanish, ensuring clear communication and understanding for all our patients. Our bilingual team of experienced healthcare professionals is committed to making your visit as comfortable and efficient as possible.",
+                "Entendemos que navegar el sistema de salud puede ser dificil, especialmente cuando existen barreras de idioma. Por eso nos enorgullece ofrecer nuestros servicios en ingles y espanol, asegurando una comunicacion clara y comprension para todos nuestros pacientes. Nuestro equipo bilingue de profesionales de la salud con experiencia esta comprometido a hacer que su visita sea lo mas comoda y eficiente posible."
               )}
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="bg-secondary">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-brand-navy md:text-4xl">
-              {t("Our Core Values", "Nuestros Valores")}
-            </h2>
-          </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                icon: Heart,
-                enTitle: "Compassion First",
-                esTitle: "Compasion Primero",
-                enDesc:
-                  "We treat every patient with the kindness and respect they deserve, because healthcare is personal.",
-                esDesc:
-                  "Tratamos a cada paciente con la amabilidad y el respeto que merece, porque la atencion medica es personal.",
-              },
-              {
-                icon: Users,
-                enTitle: "Community-Rooted",
-                esTitle: "Arraigados en la Comunidad",
-                enDesc:
-                  "We are proud to serve the community that raised us. Our doors are open to families of all backgrounds.",
-                esDesc:
-                  "Estamos orgullosos de servir a la comunidad que nos crio. Nuestras puertas estan abiertas para familias de todos los origenes.",
-              },
-              {
-                icon: Award,
-                enTitle: "Excellence in Care",
-                esTitle: "Excelencia en la Atencion",
-                enDesc:
-                  "Board-certified and continuously advancing, we bring the latest in medicine to your neighborhood.",
-                esDesc:
-                  "Certificado por la junta y avanzando continuamente, traemos lo ultimo en medicina a su vecindario.",
-              },
-            ].map((value, i) => (
-              <div key={i} className="flex flex-col items-center gap-4 rounded-xl bg-card p-8 text-center shadow-sm">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-teal/10">
-                  <value.icon className="h-7 w-7 text-brand-teal" />
-                </div>
-                <h3 className="text-xl font-bold text-brand-navy">{t(value.enTitle, value.esTitle)}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{t(value.enDesc, value.esDesc)}</p>
-              </div>
-            ))}
+            <p className="leading-relaxed text-muted-foreground">
+              {t(
+                "Our office offers a wide range of services, from routine check-ups and preventive care to specialized treatments and chronic disease management, including diabetes, high blood pressure, asthma, weight management, kidney issues, and cholesterol problems. We have access to one of the largest networks of specialists in the Coachella Valley, and we work closely with them to manage your specific healthcare needs. Patient-centered care is our priority, and we take the time to listen to your concerns and work with you to develop a personalized treatment plan.",
+                "Nuestra oficina ofrece una amplia gama de servicios, desde chequeos de rutina y atencion preventiva hasta tratamientos especializados y manejo de enfermedades cronicas, incluyendo diabetes, presion arterial alta, asma, control de peso, problemas de los rinones y problemas de colesterol. Tenemos acceso a una de las redes de especialistas mas grandes del Valle de Coachella, y trabajamos de cerca con ellos para atender sus necesidades de salud especificas. La atencion centrada en el paciente es nuestra prioridad; nos tomamos el tiempo de escuchar sus inquietudes y trabajamos con usted para desarrollar un plan de tratamiento personalizado."
+              )}
+            </p>
+            <p className="leading-relaxed text-muted-foreground">
+              {t(
+                "Here at Paredes Medical, your health and well-being are our top priorities. We strive to create a welcoming and supportive environment where you can feel confident that you are receiving the highest quality care. We are here to support you every step of the way on your health journey.",
+                "Aqui en Paredes Medical, su salud y bienestar son nuestras principales prioridades. Nos esforzamos por crear un ambiente acogedor y de apoyo donde pueda sentirse seguro de que esta recibiendo la atencion de mas alta calidad. Estamos aqui para apoyarle en cada paso de su camino hacia la salud."
+              )}
+            </p>
+            <p className="font-semibold text-brand-navy">
+              Dr. Gustavo Paredes, {t("President / CEO", "Presidente / Director General")}
+              <br />
+              Paredes Medical Corporation
+            </p>
+            <p className="font-serif text-xl italic text-brand-teal">
+              {t("Care and Compassion You Deserve!", "El Cuidado y la Compasion Que Usted Merece!")}
+            </p>
           </div>
         </div>
       </section>
@@ -119,13 +90,13 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold">{t("Ready to Join Our Family?", "Listo para Unirse a Nuestra Familia?")}</h2>
           <p className="max-w-xl text-accent-foreground/80">
             {t(
-              "We are accepting new patients. Call us today to schedule your first visit.",
-              "Estamos aceptando nuevos pacientes. Llamenos hoy para agendar su primera visita."
+              "Call our office today to schedule your visit.",
+              "Llame a nuestra oficina hoy para agendar su visita."
             )}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
-              <a href="tel:7609724704">
+              <a href={SITE.phoneHref}>
                 <Phone className="mr-2 h-5 w-5" />
                 (760) 972-4704
               </a>

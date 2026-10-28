@@ -10,18 +10,14 @@ import {
   Users,
   Award,
   Activity,
-  Baby,
-  Pill,
-  Brain,
-  Syringe,
   ClipboardList,
   ArrowRight,
   MapPin,
   Clock,
-  Star,
   Instagram,
 } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -57,7 +53,7 @@ export default function HomePage() {
                 size="lg"
                 className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90"
               >
-                <a href="tel:7609724704">
+                <a href={SITE.phoneHref}>
                   <Phone className="mr-2 h-5 w-5" />
                   {t("Call to Schedule Appointment", "Llamar para Agendar Cita")}
                 </a>
@@ -75,7 +71,7 @@ export default function HomePage() {
               </Button>
             </div>
             <a
-              href="tel:7609724704"
+              href={SITE.phoneHref}
               className="mt-2 flex items-center justify-center gap-2 text-2xl font-bold text-brand-warm-white md:justify-start"
             >
               <Phone className="h-6 w-6 text-brand-teal" />
@@ -152,14 +148,14 @@ export default function HomePage() {
             </h2>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Paredes Medical Corporation is a trusted, bilingual family medicine practice dedicated to the Coachella Valley. Led by Dr. Gustavo A. Paredes, MD, our practice combines over 30 years of medical expertise with genuine compassion for every patient.",
-                "Paredes Medical Corporation es una practica de medicina familiar bilingue y de confianza dedicada al Valle de Coachella. Dirigida por el Dr. Gustavo A. Paredes, MD, nuestra practica combina mas de 30 anos de experiencia medica con compasion genuina por cada paciente."
+                "Welcome to Paredes Medical, the medical office of Dr. Gustavo Paredes, where we believe that every patient deserves exceptional healthcare. Our mission is to provide comprehensive medical services with the genuine care and compassion every patient deserves, as though they were members of our own family.",
+                "Bienvenido a Paredes Medical, el consultorio medico del Dr. Gustavo Paredes, donde creemos que cada paciente merece una atencion medica excepcional. Nuestra mision es brindar servicios medicos integrales con el cuidado y la compasion genuinos que cada paciente merece, como si fueran miembros de nuestra propia familia."
               )}
             </p>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "We believe that healthcare should be accessible, personal, and rooted in the community. Whether you need a routine check-up, chronic disease management, or preventive care, we treat every patient like family.",
-                "Creemos que la atencion medica debe ser accesible, personal y arraigada en la comunidad. Ya sea que necesite un chequeo de rutina, manejo de enfermedades cronicas o atencion preventiva, tratamos a cada paciente como familia."
+                "We are proud to offer our services in both English and Spanish, ensuring clear communication and understanding for all our patients. Dr. Paredes has over 30 years of experience in the medical field and is a board-certified Family Medicine physician.",
+                "Nos enorgullece ofrecer nuestros servicios en ingles y espanol, asegurando una comunicacion clara y comprension para todos nuestros pacientes. El Dr. Paredes tiene mas de 30 anos de experiencia en el campo de la medicina y es medico certificado en Medicina Familiar."
               )}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -192,15 +188,12 @@ export default function HomePage() {
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: Activity, en: "Annual Physicals & Wellness", es: "Examenes Anuales y Bienestar" },
+              { icon: Activity, en: "Routine Check-Ups & Preventive Care", es: "Chequeos de Rutina y Atencion Preventiva" },
+              { icon: Stethoscope, en: "Specialized Treatments", es: "Tratamientos Especializados" },
               { icon: Heart, en: "Chronic Disease Management", es: "Manejo de Enfermedades Cronicas" },
-              { icon: Stethoscope, en: "Preventive Medicine", es: "Medicina Preventiva" },
-              { icon: Baby, en: "Pediatric Care", es: "Atencion Pediatrica" },
-              { icon: Brain, en: "Mental Health Screening", es: "Evaluacion de Salud Mental" },
-              { icon: Syringe, en: "Immunizations", es: "Vacunas" },
-              { icon: Pill, en: "Medication Management", es: "Manejo de Medicamentos" },
-              { icon: ClipboardList, en: "Lab & Diagnostic Orders", es: "Ordenes de Laboratorio y Diagnostico" },
-              { icon: ShieldCheck, en: "Insurance Navigation Help", es: "Ayuda con Seguros Medicos" },
+              { icon: ClipboardList, en: "Diabetes & High Blood Pressure", es: "Diabetes y Presion Arterial Alta" },
+              { icon: Activity, en: "Asthma & Weight Management", es: "Asma y Control de Peso" },
+              { icon: ShieldCheck, en: "Kidney Issues & Cholesterol Problems", es: "Problemas de los Rinones y del Colesterol" },
             ].map((service, i) => (
               <Card key={i} className="border-0 bg-card shadow-sm transition-shadow hover:shadow-md">
                 <CardContent className="flex items-start gap-4 p-6">
@@ -247,61 +240,17 @@ export default function HomePage() {
               size="lg"
               className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90"
             >
-              <a href="tel:7609724704">
+              <a href={SITE.phoneHref}>
                 <Phone className="mr-2 h-5 w-5" />
-                {t("Schedule Your Visit Today", "Agende Su Visita Hoy")}
+                {t("Call to Schedule Your Visit", "Llame para Agendar Su Visita")}
               </a>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="bg-secondary">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="mb-12 text-center">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-brand-teal">
-              {t("Patient Stories", "Historias de Pacientes")}
-            </p>
-            <h2 className="text-3xl font-bold text-brand-navy md:text-4xl">
-              {t("What Our Patients Say", "Lo Que Dicen Nuestros Pacientes")}
-            </h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                en: "Dr. Paredes truly cares about his patients. He takes the time to listen and explain everything in both English and Spanish. My whole family sees him!",
-                es: "El Dr. Paredes realmente se preocupa por sus pacientes. Se toma el tiempo para escuchar y explicar todo en ingles y espanol. Toda mi familia lo visita!",
-                name: "Maria G.",
-              },
-              {
-                en: "The staff is wonderful and so welcoming. Being able to communicate in Spanish makes such a big difference for my parents. We are so grateful for this practice.",
-                es: "El personal es maravilloso y muy acogedor. Poder comunicarse en espanol hace una gran diferencia para mis padres. Estamos muy agradecidos por esta practica.",
-                name: "Carlos R.",
-              },
-              {
-                en: "I've been going to Dr. Paredes for years. He always goes above and beyond. The new office in Coachella is beautiful and easy to get to.",
-                es: "He ido al Dr. Paredes por anos. Siempre va mas alla. La nueva oficina en Coachella es hermosa y facil de llegar.",
-                name: "Linda T.",
-              },
-            ].map((testimonial, i) => (
-              <Card key={i} className="border-0 bg-card shadow-sm">
-                <CardContent className="flex flex-col gap-4 p-6">
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, j) => (
-                      <Star key={j} className="h-4 w-4 fill-brand-red text-brand-red" />
-                    ))}
-                  </div>
-                  <p className="flex-1 text-sm leading-relaxed text-muted-foreground italic">
-                    {`"${t(testimonial.en, testimonial.es)}"`}
-                  </p>
-                  <p className="text-sm font-semibold text-brand-navy">-- {testimonial.name}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Testimonials: intentionally removed. The previous quotes were invented.
+          TODO(clinic): add real, consented patient reviews here (e.g., from Yelp) before publishing. */}
 
       {/* Instagram Feed Teaser */}
       <section className="bg-background">
@@ -319,7 +268,7 @@ export default function HomePage() {
             {[1, 2, 3, 4].map((i) => (
               <a
                 key={i}
-                href="https://www.instagram.com/paredesmedical?igsh=MzRlODBiNWFlZA%3D%3D"
+                href={SITE.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative aspect-square overflow-hidden rounded-xl bg-secondary"
@@ -340,7 +289,7 @@ export default function HomePage() {
               className="border-brand-red text-brand-red hover:bg-brand-red/5"
             >
               <a
-                href="https://www.instagram.com/paredesmedical?igsh=MzRlODBiNWFlZA%3D%3D"
+                href={SITE.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -358,7 +307,7 @@ export default function HomePage() {
           <div className="grid gap-8 lg:grid-cols-2">
             <div className="overflow-hidden rounded-xl shadow-md">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.5!2d-116.174!3d33.6804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80db0d1234567890%3A0x1234567890!2s49201+Grapefruit+Blvd+%233%2C+Coachella%2C+CA+92236!5e0!3m2!1sen!2sus!4v1700000000000"
+                src={SITE.mapsEmbed}
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
@@ -394,7 +343,7 @@ export default function HomePage() {
                 <div className="flex items-start gap-3">
                   <Phone className="mt-1 h-5 w-5 shrink-0 text-brand-red" />
                   <div>
-                    <a href="tel:7609724704" className="text-lg font-bold text-brand-navy hover:text-brand-teal">
+                    <a href={SITE.phoneHref} className="text-lg font-bold text-brand-navy hover:text-brand-teal">
                       (760) 972-4704
                     </a>
                   </div>
@@ -405,7 +354,7 @@ export default function HomePage() {
                   asChild
                   className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90"
                 >
-                  <a href="tel:7609724704">
+                  <a href={SITE.phoneHref}>
                     <Phone className="mr-2 h-4 w-4" />
                     {t("Call to Schedule", "Llamar para Agendar")}
                   </a>
@@ -416,7 +365,7 @@ export default function HomePage() {
                   className="border-brand-navy text-brand-navy hover:bg-brand-navy/5"
                 >
                   <a
-                    href="https://maps.google.com/?q=49201+Grapefruit+Blvd+Suite+3+Coachella+CA+92236"
+                    href={SITE.mapsHref}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

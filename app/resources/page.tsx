@@ -10,6 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -165,7 +166,7 @@ export default function ResourcesPage() {
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-brand-navy text-brand-navy hover:bg-brand-navy/5">
-                <a href="tel:7609724704">
+                <a href={SITE.phoneHref}>
                   <Phone className="mr-2 h-4 w-4" />
                   {t("Call Our Office", "Llamar a Nuestra Oficina")}
                 </a>
@@ -188,7 +189,7 @@ export default function ResourcesPage() {
             )}
           </p>
           <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
-            <a href="tel:7609724704">
+            <a href={SITE.phoneHref}>
               <Phone className="mr-2 h-5 w-5" />
               (760) 972-4704
             </a>

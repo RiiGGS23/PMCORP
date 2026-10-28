@@ -1,24 +1,52 @@
 "use client"
 
-import { Phone, ShieldCheck, HelpCircle } from "lucide-react"
+import { Phone, ShieldCheck, AlertCircle } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
-const insurances = [
+// Lists copied exactly from paredesmedicalcorp.com/what-insurance-we-accept
+const commercialHmo = [
   "Aetna",
   "Blue Shield of California",
   "Cigna",
+  "Covered California",
   "Health Net",
   "Molina Healthcare",
-  "Medicare",
-  "Medi-Cal",
-  "IEHP (Inland Empire Health Plan)",
-  "United Healthcare",
-  "Tricare",
-  "Anthem Blue Cross",
-  "Oscar Health",
+  "UnitedHealthcare",
 ]
+
+const medicareAdvantageHmo = [
+  "Aetna Medicare",
+  "Alignment Health Plan",
+  "Anthem Blue Cross",
+  "Astiva",
+  "Blue Shield",
+  "Health Net",
+  "Humana",
+  "Molina Healthcare",
+  "SCAN Health Plan",
+  "UnitedHealthcare",
+  "Wellcare",
+]
+
+function PlanGrid({ plans }: { plans: string[] }) {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {plans.map((name) => (
+        <Card key={name} className="border-0 shadow-sm">
+          <CardContent className="flex items-center gap-4 p-5">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-teal/10">
+              <ShieldCheck className="h-5 w-5 text-brand-teal" />
+            </div>
+            <span className="text-sm font-semibold text-brand-navy">{name}</span>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  )
+}
 
 export default function InsurancesPage() {
   const { t } = useLanguage()
@@ -29,94 +57,65 @@ export default function InsurancesPage() {
       <section className="bg-brand-navy">
         <div className="mx-auto max-w-7xl px-4 py-16 text-center md:py-20">
           <h1 className="text-4xl font-bold text-brand-warm-white md:text-5xl">
-            {t("Accepted Insurances", "Seguros Aceptados")}
+            {t("What Insurance We Accept", "Seguros Que Aceptamos")}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/70">
-            {t(
-              "We accept most major insurance plans. Our bilingual staff is happy to help verify your coverage.",
-              "Aceptamos la mayoria de los planes de seguro principales. Nuestro personal bilingue esta feliz de ayudarle a verificar su cobertura."
-            )}
+            {t("We accept the following HMO plans.", "Aceptamos los siguientes planes HMO.")}
           </p>
         </div>
       </section>
 
-      {/* Insurance Grid */}
+      {/* HMO-only notice */}
       <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="mb-10 text-center">
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-teal">
-              {t("Plans We Accept", "Planes Que Aceptamos")}
-            </p>
-            <h2 className="mt-2 text-3xl font-bold text-brand-navy">
-              {t("Insurance Partners", "Socios de Seguros")}
-            </h2>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {insurances.map((name, i) => (
-              <Card key={i} className="border-0 shadow-sm transition-shadow hover:shadow-md">
-                <CardContent className="flex items-center gap-4 p-5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-teal/10">
-                    <ShieldCheck className="h-5 w-5 text-brand-teal" />
-                  </div>
-                  <span className="text-sm font-semibold text-brand-navy">{name}</span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Not seeing your plan */}
-      <section className="bg-secondary">
-        <div className="mx-auto max-w-4xl px-4 py-16 md:py-20">
-          <div className="flex flex-col items-center gap-6 rounded-2xl bg-card p-8 text-center shadow-sm md:p-12">
-            <HelpCircle className="h-12 w-12 text-brand-teal" />
-            <h2 className="text-2xl font-bold text-brand-navy md:text-3xl">
-              {t("Don't See Your Insurance?", "No Ve Su Seguro?")}
-            </h2>
-            <p className="max-w-xl leading-relaxed text-muted-foreground">
+        <div className="mx-auto max-w-4xl px-4 pt-12">
+          <div className="flex items-start gap-4 rounded-xl border-2 border-brand-red/30 bg-brand-red/5 p-6">
+            <AlertCircle className="mt-0.5 h-6 w-6 shrink-0 text-brand-red" />
+            <p className="font-semibold text-brand-navy">
               {t(
-                "We are always adding new plans. Please call our office and our friendly staff will be happy to check if we accept your insurance. We also assist patients without insurance and can discuss payment options.",
-                "Siempre estamos agregando nuevos planes. Por favor llame a nuestra oficina y nuestro amable personal estara feliz de verificar si aceptamos su seguro. Tambien asistimos a pacientes sin seguro y podemos discutir opciones de pago."
+                "HMO plans only. At this time we are not accepting any PPO insurance plans.",
+                "Solo planes HMO. En este momento no estamos aceptando ningun plan de seguro PPO."
               )}
             </p>
-            <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
-              <a href="tel:7609724704">
-                <Phone className="mr-2 h-5 w-5" />
-                {t("Call to Verify Coverage", "Llame para Verificar Cobertura")}
-              </a>
-            </Button>
           </div>
         </div>
       </section>
 
-      {/* Self-Pay */}
+      {/* Commercial HMO */}
       <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="flex flex-col gap-4">
-              <h2 className="text-2xl font-bold text-brand-navy">
-                {t("Self-Pay & Uninsured Patients", "Pacientes Sin Seguro")}
-              </h2>
-              <p className="leading-relaxed text-muted-foreground">
-                {t(
-                  "We believe everyone deserves quality healthcare. If you do not have insurance, please don't hesitate to contact us. We offer affordable self-pay rates and our staff can help connect you with resources for health coverage enrollment.",
-                  "Creemos que todos merecen atencion medica de calidad. Si no tiene seguro, no dude en contactarnos. Ofrecemos tarifas de pago propio accesibles y nuestro personal puede ayudarle a conectarse con recursos para la inscripcion de cobertura de salud."
-                )}
-              </p>
-            </div>
-            <div className="flex flex-col gap-4">
-              <h2 className="text-2xl font-bold text-brand-navy">
-                {t("Insurance Questions?", "Preguntas Sobre Seguros?")}
-              </h2>
-              <p className="leading-relaxed text-muted-foreground">
-                {t(
-                  "Our bilingual office staff is experienced in navigating insurance questions. We can help with prior authorizations, referrals, and understanding your benefits. Just give us a call!",
-                  "Nuestro personal bilingue tiene experiencia en navegar preguntas sobre seguros. Podemos ayudar con autorizaciones previas, referencias y entender sus beneficios. Solo llamenos!"
-                )}
-              </p>
-            </div>
-          </div>
+        <div className="mx-auto max-w-7xl px-4 py-12">
+          <h2 className="mb-6 text-2xl font-bold text-brand-navy md:text-3xl">
+            {t("Commercial HMO Plans", "Planes HMO Comerciales")}
+          </h2>
+          <PlanGrid plans={commercialHmo} />
+        </div>
+      </section>
+
+      {/* Medicare Advantage HMO */}
+      <section className="bg-background">
+        <div className="mx-auto max-w-7xl px-4 pb-16 md:pb-20">
+          <h2 className="mb-6 text-2xl font-bold text-brand-navy md:text-3xl">
+            {t("Medicare Advantage HMO Plans", "Planes HMO de Medicare Advantage")}
+          </h2>
+          <PlanGrid plans={medicareAdvantageHmo} />
+        </div>
+      </section>
+
+      {/* Call to verify */}
+      <section className="bg-brand-teal">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-4 py-14 text-center text-accent-foreground">
+          <h2 className="text-3xl font-bold">{t("Questions About Your Plan?", "Preguntas Sobre Su Plan?")}</h2>
+          <p className="max-w-xl text-accent-foreground/80">
+            {t(
+              "Call our office to confirm whether we accept your insurance.",
+              "Llame a nuestra oficina para confirmar si aceptamos su seguro."
+            )}
+          </p>
+          <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
+            <a href={SITE.phoneHref}>
+              <Phone className="mr-2 h-5 w-5" />
+              {t("Call to Verify Coverage", "Llame para Verificar Cobertura")} {SITE.phoneDisplay}
+            </a>
+          </Button>
         </div>
       </section>
     </div>
