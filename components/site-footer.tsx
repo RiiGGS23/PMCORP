@@ -10,7 +10,7 @@ export function SiteFooter() {
   const { t } = useLanguage()
 
   return (
-    <footer className="bg-brand-navy text-brand-warm-white">
+    <footer className="bg-brand-navy pb-24 text-brand-warm-white md:pb-0">
       <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
@@ -32,7 +32,7 @@ export function SiteFooter() {
               href={SITE.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-brand-warm-white/70 transition-colors hover:text-brand-teal"
+              className="flex min-h-11 items-center gap-2 text-base text-brand-warm-white/70 transition-colors hover:text-brand-teal md:text-sm"
               aria-label="Instagram"
             >
               <Instagram className="h-5 w-5" />
@@ -42,7 +42,7 @@ export function SiteFooter() {
               href={SITE.yelp}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-brand-warm-white/70 transition-colors hover:text-brand-teal"
+              className="flex min-h-11 items-center gap-2 text-base text-brand-warm-white/70 transition-colors hover:text-brand-teal md:text-sm"
               aria-label="Yelp"
             >
               <Star className="h-5 w-5" />
@@ -55,7 +55,7 @@ export function SiteFooter() {
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-brand-teal">
               {t("Quick Links", "Enlaces")}
             </h3>
-            <ul className="flex flex-col gap-2.5">
+            <ul className="flex flex-col">
               {[
                 { en: "About Us", es: "Sobre Nosotros", href: "/about" },
                 { en: "Our Doctor", es: "Nuestro Doctor", href: "/doctor" },
@@ -68,7 +68,7 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-brand-warm-white/70 transition-colors hover:text-brand-warm-white"
+                    className="flex min-h-11 items-center text-base text-brand-warm-white/70 transition-colors hover:text-brand-warm-white md:text-sm"
                   >
                     {t(item.en, item.es)}
                   </Link>
@@ -86,7 +86,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href={SITE.phoneHref}
-                  className="flex items-start gap-2.5 text-sm text-brand-warm-white/70 transition-colors hover:text-brand-warm-white"
+                  className="flex min-h-11 items-start gap-2.5 py-1 text-base text-brand-warm-white/70 transition-colors hover:text-brand-warm-white md:text-sm"
                 >
                   <Phone className="mt-0.5 h-4 w-4 shrink-0" />
                   (760) 972-4704
@@ -103,7 +103,7 @@ export function SiteFooter() {
                   href={SITE.mapsHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-2.5 text-sm text-brand-warm-white/70 transition-colors hover:text-brand-warm-white"
+                  className="flex min-h-11 items-start gap-2.5 py-1 text-base text-brand-warm-white/70 transition-colors hover:text-brand-warm-white md:text-sm"
                 >
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
                   {SITE.addressFull}
@@ -134,18 +134,18 @@ export function SiteFooter() {
           <p className="text-xs text-brand-warm-white/50">
             &copy; 2026 Paredes Medical Corporation. {t("All rights reserved.", "Todos los derechos reservados.")}
           </p>
-          <div className="flex gap-6 text-xs text-brand-warm-white/50">
-            <Link href="/privacy" className="transition-colors hover:text-brand-warm-white">
+          <div className="flex flex-wrap justify-center gap-x-6 text-sm text-brand-warm-white/60">
+            <Link href="/privacy" className="inline-flex min-h-11 items-center transition-colors hover:text-brand-warm-white">
               {t("Privacy Policy", "Politica de Privacidad")}
             </Link>
-            <Link href="/hipaa" className="transition-colors hover:text-brand-warm-white">
+            <Link href="/hipaa" className="inline-flex min-h-11 items-center transition-colors hover:text-brand-warm-white">
               {t("HIPAA Notice", "Aviso HIPAA")}
             </Link>
             <a
               href="https://abysstech.io"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-brand-warm-white"
+              className="inline-flex min-h-11 items-center transition-colors hover:text-brand-warm-white"
             >
               {t("Powered by Abyss Tech", "Powered by Abyss Tech")}
             </a>

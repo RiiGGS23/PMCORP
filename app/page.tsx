@@ -8,7 +8,6 @@ import {
   Stethoscope,
   ShieldCheck,
   Users,
-  Award,
   Activity,
   ClipboardList,
   ArrowRight,
@@ -26,71 +25,100 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-brand-navy">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,168,150,0.15),transparent_60%)]" />
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-16 md:flex-row md:py-20 lg:py-24">
-          <div className="relative z-10 flex flex-1 flex-col gap-6 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 self-center rounded-full border border-brand-teal/30 bg-brand-teal/10 px-4 py-1.5 text-sm text-brand-teal md:self-start">
-              <Award className="h-4 w-4" />
-              {t("2025 Coachella Valley New Business of the Year", "Negocio Nuevo del Ano 2025 del Valle de Coachella")}
-            </div>
-            <h1 className="text-balance text-5xl font-bold leading-tight tracking-tight text-brand-warm-white md:text-6xl lg:text-7xl">
-              {t("PAREDES MEDICAL CORPORATION", "PAREDES MEDICAL CORPORATION")}
+      {/* Hero Section: mobile-first. Photo stacks above text on phones/tablets so nothing
+          overlaps Dr. Paredes' face; on large screens text sits left, photo right. */}
+      <section className="bg-brand-navy">
+        <div className="mx-auto grid max-w-7xl lg:min-h-[560px] lg:grid-cols-2">
+          {/* Photo */}
+          <div className="relative order-1 lg:order-2">
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/images/dr-paredes-hero-800.webp 800w, /images/dr-paredes-hero-1600.webp 1600w"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
+              <img
+                src="/images/dr-paredes-hero-800.webp"
+                alt={t(
+                  "Dr. Gustavo A. Paredes, MD, family medicine physician at Paredes Medical Corporation in Coachella, California",
+                  "Dr. Gustavo A. Paredes, MD, medico de medicina familiar en Paredes Medical Corporation en Coachella, California"
+                )}
+                width={1600}
+                height={1067}
+                fetchPriority="high"
+                className="block aspect-[3/2] h-auto w-full object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:object-[62%_35%]"
+              />
+            </picture>
+            {/* Desktop only: soft fade on the empty left edge of the photo (face is right of center) */}
+            <div
+              className="pointer-events-none absolute inset-y-0 left-0 hidden w-24 bg-gradient-to-r from-brand-navy to-transparent lg:block"
+              aria-hidden="true"
+            />
+          </div>
+
+          {/* Text */}
+          <div className="order-2 flex flex-col items-center gap-4 px-5 py-8 text-center sm:py-10 lg:order-1 lg:items-start lg:justify-center lg:px-10 lg:py-16 lg:text-left">
+            <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-brand-warm-white sm:text-5xl lg:text-6xl">
+              Paredes Medical
             </h1>
-            <h2 className="text-balance text-2xl font-semibold text-brand-teal md:text-3xl">
-              {t("Care and Compassion You Deserve", "Cuidado y Compasion Que Usted Merece")}
-            </h2>
-            <p className="max-w-lg text-lg leading-relaxed text-brand-warm-white/70">
+            <p className="font-script text-3xl leading-snug text-brand-teal sm:text-4xl lg:text-5xl">
+              {t("Care and Compassion You Deserve", "El Cuidado y la Compasion Que Usted Merece")}
+            </p>
+            <a
+              id="hero-call"
+              href={SITE.phoneHref}
+              className="mt-2 inline-flex min-h-14 w-full max-w-sm items-center justify-center gap-3 rounded-xl bg-brand-red px-6 text-xl font-bold text-white shadow-lg transition-colors hover:bg-brand-red/90 sm:w-auto"
+            >
+              <Phone className="h-6 w-6" />
+              {t("Call", "Llame al")} {SITE.phoneDisplay}
+            </a>
+            <p className="max-w-lg text-base leading-relaxed text-brand-warm-white/80 sm:text-lg">
               {t(
                 "Bilingual family medicine for the Coachella Valley. Dr. Gustavo Paredes and our caring team are here for your whole family.",
                 "Medicina familiar bilingue para el Valle de Coachella. El Dr. Gustavo Paredes y nuestro equipo estan aqui para toda su familia."
               )}
             </p>
-            <div className="flex flex-col items-center gap-3 sm:flex-row md:items-start">
-              <Button
-                asChild
-                size="lg"
-                className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90"
-              >
-                <a href={SITE.phoneHref}>
-                  <Phone className="mr-2 h-5 w-5" />
-                  {t("Call to Schedule Appointment", "Llamar para Agendar Cita")}
-                </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-brand-warm-white/30 bg-transparent text-brand-warm-white hover:bg-brand-warm-white/10"
-              >
-                <Link href="/about">
-                  {t("Learn More", "Conocer Mas")}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
             <a
-              href={SITE.phoneHref}
-              className="mt-2 flex items-center justify-center gap-2 text-2xl font-bold text-brand-warm-white md:justify-start"
+              href="#award"
+              className="inline-flex min-h-11 items-center gap-3 rounded-full border border-brand-warm-white/25 bg-brand-warm-white/5 py-1 pl-1 pr-4 text-sm font-semibold text-brand-warm-white transition-colors hover:bg-brand-warm-white/10"
             >
-              <Phone className="h-6 w-6 text-brand-teal" />
-              (760) 972-4704
-            </a>
-          </div>
-          <div className="relative flex-1">
-            <div className="relative mx-auto aspect-[4/3] w-full max-w-2xl overflow-hidden rounded-2xl shadow-2xl">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero%20Banner-LIxmb6nzHRtV7xX7ztmNNUjfEDBeNy.jpg"
-                alt="Dr. Gustavo Paredes and the Paredes Medical team"
-                fill
-                className="object-contain"
-                priority
+              <img
+                src="/images/businessrate-best-of-2026-320.webp"
+                alt=""
+                width={28}
+                height={35}
+                className="h-9 w-auto rounded"
               />
-            </div>
+              {t("Best of 2026 Award Winner · BusinessRate", "Premio: Best of 2026 Award Winner · BusinessRate")}
+            </a>
           </div>
         </div>
       </section>
+
+      {/* Quick links */}
+      <nav aria-label={t("Quick links", "Enlaces rapidos")} className="border-b border-border bg-card">
+        <ul className="mx-auto grid max-w-7xl grid-cols-2 gap-3 px-4 py-5 sm:grid-cols-3 lg:grid-cols-6">
+          {[
+            { icon: Phone, en: "Call Us", es: "Llamenos", href: SITE.phoneHref, external: false },
+            { icon: Stethoscope, en: "Meet Our Doctor", es: "Nuestro Doctor", href: "/doctor", external: false },
+            { icon: Users, en: "Our Staff", es: "Nuestro Equipo", href: "/staff", external: false },
+            { icon: Heart, en: "Services", es: "Servicios", href: "/services", external: false },
+            { icon: ShieldCheck, en: "Insurances", es: "Seguros", href: "/insurances", external: false },
+            { icon: MapPin, en: "Directions", es: "Como Llegar", href: SITE.directionsHref, external: true },
+          ].map((q) => (
+            <li key={q.en}>
+              <a
+                href={q.href}
+                {...(q.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="flex min-h-20 flex-col items-center justify-center gap-2 rounded-xl border border-border bg-secondary px-2 py-3 text-center text-base font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:bg-brand-teal/10"
+              >
+                <q.icon className="h-6 w-6 text-brand-red" aria-hidden="true" />
+                {t(q.en, q.es)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       {/* Stats Bar */}
       <section className="bg-brand-teal">
@@ -218,33 +246,48 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Award Section */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="flex flex-col items-center gap-8 rounded-2xl bg-brand-navy p-8 text-center md:p-12">
-            <Award className="h-16 w-16 text-brand-teal" />
-            <h2 className="text-3xl font-bold text-brand-warm-white md:text-4xl">
-              {t(
-                "2025 Coachella Valley New Business of the Year",
-                "Negocio Nuevo del Ano 2025 del Valle de Coachella"
-              )}
-            </h2>
-            <p className="max-w-2xl leading-relaxed text-brand-warm-white/70">
-              {t(
-                "We are honored to be recognized by the Greater Coachella Valley Chamber of Commerce as the 2025 New Business of the Year. This award reflects our deep commitment to providing excellent, compassionate healthcare to the community we call home.",
-                "Nos sentimos honrados de ser reconocidos por la Camara de Comercio del Gran Valle de Coachella como el Negocio Nuevo del Ano 2025. Este premio refleja nuestro profundo compromiso de brindar atencion medica excelente y compasiva a la comunidad que llamamos hogar."
-              )}
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90"
-            >
-              <a href={SITE.phoneHref}>
-                <Phone className="mr-2 h-5 w-5" />
-                {t("Call to Schedule Your Visit", "Llame para Agendar Su Visita")}
+      {/* Award Section: wording limited to what is printed on the plaque */}
+      <section id="award" className="scroll-mt-24 bg-background">
+        <div className="mx-auto max-w-5xl px-4 py-16 md:py-20">
+          <div className="flex flex-col items-center gap-8 rounded-2xl bg-brand-navy p-6 text-center sm:p-10 md:flex-row md:text-left">
+            <picture className="shrink-0">
+              <source type="image/webp" srcSet="/images/businessrate-best-of-2026-320.webp 320w, /images/businessrate-best-of-2026-640.webp 640w" sizes="(min-width: 768px) 280px, 240px" />
+              <img
+                src="/images/businessrate-best-of-2026-640.webp"
+                alt={t(
+                  "BusinessRate Best of 2026 Award Winner plaque (Benchmark) for Dr. Gustavo A. Paredes, MD, Family Practice Physician, Coachella, California, powered by Google Reviews",
+                  "Placa del premio BusinessRate Best of 2026 Award Winner (Benchmark) para Dr. Gustavo A. Paredes, MD, Family Practice Physician, Coachella, California, Powered by Google Reviews"
+                )}
+                width={640}
+                height={801}
+                loading="lazy"
+                className="h-auto w-60 rounded-lg shadow-2xl md:w-72"
+              />
+            </picture>
+            <div className="flex flex-col gap-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-brand-teal">
+                {t("Award", "Reconocimiento")}
+              </p>
+              <h2 className="text-3xl font-bold text-brand-warm-white md:text-4xl">
+                Best of 2026 Award Winner
+              </h2>
+              <p className="text-lg text-brand-warm-white/80">BusinessRate (Benchmark)</p>
+              <p className="leading-relaxed text-brand-warm-white/80">
+                Dr. Gustavo A. Paredes, MD
+                <br />
+                Family Practice Physician
+                <br />
+                Coachella, California
+              </p>
+              <p className="text-sm text-brand-warm-white/60">Powered by Google Reviews</p>
+              <a
+                href={SITE.phoneHref}
+                className="mt-2 inline-flex min-h-12 items-center justify-center gap-2 self-center rounded-xl bg-brand-red px-6 text-lg font-bold text-white hover:bg-brand-red/90 md:self-start"
+              >
+                <Phone className="h-5 w-5" />
+                {t("Call", "Llame al")} {SITE.phoneDisplay}
               </a>
-            </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -343,7 +386,7 @@ export default function HomePage() {
                 <div className="flex items-start gap-3">
                   <Phone className="mt-1 h-5 w-5 shrink-0 text-brand-red" />
                   <div>
-                    <a href={SITE.phoneHref} className="text-lg font-bold text-brand-navy hover:text-brand-teal">
+                    <a href={SITE.phoneHref} className="inline-flex min-h-11 items-center text-lg font-bold text-brand-navy hover:text-brand-teal">
                       (760) 972-4704
                     </a>
                   </div>

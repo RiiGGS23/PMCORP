@@ -46,7 +46,7 @@ export default function ContactPage() {
                   <Phone className="h-6 w-6 text-brand-red" />
                 </div>
                 <h3 className="font-bold text-brand-navy">{t("Phone", "Telefono")}</h3>
-                <a href={SITE.phoneHref} className="text-lg font-bold text-brand-navy hover:text-brand-teal">
+                <a href={SITE.phoneHref} className="inline-flex min-h-11 items-center text-lg font-bold text-brand-navy hover:text-brand-teal">
                   {SITE.phoneDisplay}
                 </a>
               </CardContent>

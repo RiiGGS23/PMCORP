@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Inter, Merriweather } from "next/font/google"
+import { Inter, Merriweather, Dancing_Script } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { LanguageProvider } from "@/lib/language-context"
 import { SiteHeader } from "@/components/site-header"
@@ -16,6 +16,13 @@ const _merriweather = Merriweather({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-merriweather",
+})
+
+const _dancing = Dancing_Script({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-dancing-script",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -49,11 +56,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${_inter.variable} ${_merriweather.variable}`}>
+    <html lang="en" className={`${_inter.variable} ${_merriweather.variable} ${_dancing.variable}`}>
       <body className="font-sans antialiased">
         <LanguageProvider>
           <SiteHeader />
-          <main>{children}</main>
+          <main className="overflow-x-clip">{children}</main>
           <SiteFooter />
           <FloatingCallButton />
         </LanguageProvider>
