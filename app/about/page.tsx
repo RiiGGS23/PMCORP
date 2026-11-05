@@ -33,7 +33,7 @@ export default function AboutPage() {
           <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-xl shadow-lg">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero%20Banner-LIxmb6nzHRtV7xX7ztmNNUjfEDBeNy.jpg"
-              alt={t("Paredes Medical team", "Equipo de Paredes Medical")}
+              alt={t("Paredes Medical Corporation team", "Equipo de Paredes Medical Corporation")}
               fill
               className="object-cover"
             />
@@ -50,8 +50,8 @@ export default function AboutPage() {
             </h2>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Welcome to Paredes Medical, the medical office of Dr. Gustavo Paredes, where we believe that every patient deserves exceptional healthcare. Our mission is to provide comprehensive medical services with the genuine care and compassion every patient deserves, as though they were members of our own family.",
-                "Bienvenido a Paredes Medical, el consultorio medico del Dr. Gustavo Paredes, donde creemos que cada paciente merece una atencion medica excepcional. Nuestra mision es brindar servicios medicos integrales con el cuidado y la compasion genuinos que cada paciente merece, como si fueran miembros de nuestra propia familia."
+                "Welcome to Paredes Medical Corporation, the medical office of Dr. Gustavo Paredes, where we believe that every patient deserves exceptional healthcare. Our mission is to provide comprehensive medical services with the genuine care and compassion every patient deserves, as though they were members of our own family.",
+                "Bienvenido a Paredes Medical Corporation, el consultorio medico del Dr. Gustavo Paredes, donde creemos que cada paciente merece una atencion medica excepcional. Nuestra mision es brindar servicios medicos integrales con el cuidado y la compasion genuinos que cada paciente merece, como si fueran miembros de nuestra propia familia."
               )}
             </p>
             <p className="leading-relaxed text-muted-foreground">
@@ -62,14 +62,14 @@ export default function AboutPage() {
             </p>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Our office offers a wide range of services, from routine check-ups and preventive care to specialized treatments and chronic disease management, including diabetes, high blood pressure, asthma, weight management, kidney issues, and cholesterol problems. We have access to one of the largest networks of specialists in the Coachella Valley, and we work closely with them to manage your specific healthcare needs. Patient-centered care is our priority, and we take the time to listen to your concerns and work with you to develop a personalized treatment plan.",
-                "Nuestra oficina ofrece una amplia gama de servicios, desde chequeos de rutina y atencion preventiva hasta tratamientos especializados y manejo de enfermedades cronicas, incluyendo diabetes, presion arterial alta, asma, control de peso, problemas de los rinones y problemas de colesterol. Tenemos acceso a una de las redes de especialistas mas grandes del Valle de Coachella, y trabajamos de cerca con ellos para atender sus necesidades de salud especificas. La atencion centrada en el paciente es nuestra prioridad; nos tomamos el tiempo de escuchar sus inquietudes y trabajamos con usted para desarrollar un plan de tratamiento personalizado."
+                "Our office offers a wide range of services, from routine visits and preventive care to specialized treatments and chronic disease management, including diabetes, high blood pressure, asthma, weight management, kidney issues, and cholesterol problems. We have access to one of the largest networks of specialists in the Coachella Valley, and we work closely with them to manage your specific healthcare needs. Patient-centered care is our priority, and we take the time to listen to your concerns and work with you to develop a personalized treatment plan.",
+                "Nuestra oficina ofrece una amplia gama de servicios, desde consultas de rutina y atencion preventiva hasta tratamientos especializados y manejo de enfermedades cronicas, incluyendo diabetes, presion arterial alta, asma, control de peso, problemas de los rinones y problemas de colesterol. Tenemos acceso a una de las redes de especialistas mas grandes del Valle de Coachella, y trabajamos de cerca con ellos para atender sus necesidades de salud especificas. La atencion centrada en el paciente es nuestra prioridad; nos tomamos el tiempo de escuchar sus inquietudes y trabajamos con usted para desarrollar un plan de tratamiento personalizado."
               )}
             </p>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Here at Paredes Medical, your health and well-being are our top priorities. We strive to create a welcoming and supportive environment where you can feel confident that you are receiving the highest quality care. We are here to support you every step of the way on your health journey.",
-                "Aqui en Paredes Medical, su salud y bienestar son nuestras principales prioridades. Nos esforzamos por crear un ambiente acogedor y de apoyo donde pueda sentirse seguro de que esta recibiendo la atencion de mas alta calidad. Estamos aqui para apoyarle en cada paso de su camino hacia la salud."
+                "Here at Paredes Medical Corporation, your health and well-being are our top priorities. We strive to create a welcoming and supportive environment where you can feel confident that you are receiving the highest quality care. We are here to support you every step of the way on your health journey.",
+                "Aqui en Paredes Medical Corporation, su salud y bienestar son nuestras principales prioridades. Nos esforzamos por crear un ambiente acogedor y de apoyo donde pueda sentirse seguro de que esta recibiendo la atencion de mas alta calidad. Estamos aqui para apoyarle en cada paso de su camino hacia la salud."
               )}
             </p>
             <p className="font-semibold text-brand-navy">

@@ -10,10 +10,10 @@ import { Card, CardContent } from "@/components/ui/card"
 const services = [
   {
     icon: Activity,
-    enTitle: "Routine Check-Ups & Preventive Care",
-    esTitle: "Chequeos de Rutina y Atencion Preventiva",
-    enDesc: "Regular checkups and annual wellness and prevention exams to assess your overall health and catch potential issues early.",
-    esDesc: "Chequeos regulares y examenes anuales de bienestar y prevencion para evaluar su salud general y detectar problemas a tiempo.",
+    enTitle: "Routine Visits & Preventive Care",
+    esTitle: "Consultas de Rutina y Atencion Preventiva",
+    enDesc: "Regular visits and annual wellness and prevention exams to assess your overall health and catch potential issues early.",
+    esDesc: "Consultas regulares y examenes anuales de bienestar y prevencion para evaluar su salud general y detectar problemas a tiempo.",
   },
   {
     icon: Stethoscope,
@@ -43,7 +43,7 @@ const chronicConditions = [
 const pcpRoles = [
   { en: "Advocating for your needs and providing guidance.", es: "Abogar por sus necesidades y brindarle orientacion." },
   { en: "Diagnosing and managing chronic conditions like diabetes and high blood pressure.", es: "Diagnosticar y manejar condiciones cronicas como la diabetes y la presion arterial alta." },
-  { en: "Monitoring your health through regular checkups.", es: "Vigilar su salud mediante chequeos regulares." },
+  { en: "Monitoring your health through regular visits.", es: "Vigilar su salud mediante consultas regulares." },
   { en: "Conducting annual wellness and prevention exams to assess your overall health and catch potential issues early.", es: "Realizar examenes anuales de bienestar y prevencion para evaluar su salud general y detectar problemas a tiempo." },
   { en: "Educating you on healthy lifestyle choices to prevent health issues.", es: "Educarle sobre habitos de vida saludables para prevenir problemas de salud." },
   { en: "Coordinating care with specialists, pharmacists and other healthcare providers.", es: "Coordinar su atencion con especialistas, farmaceuticos y otros proveedores de salud." },
@@ -62,8 +62,8 @@ export default function ServicesPage() {
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/70">
             {t(
-              "From routine check-ups and preventive care to specialized treatments and chronic disease management.",
-              "Desde chequeos de rutina y atencion preventiva hasta tratamientos especializados y manejo de enfermedades cronicas."
+              "From routine visits and preventive care to specialized treatments and chronic disease management.",
+              "Desde consultas de rutina y atencion preventiva hasta tratamientos especializados y manejo de enfermedades cronicas."
             )}
           </p>
         </div>

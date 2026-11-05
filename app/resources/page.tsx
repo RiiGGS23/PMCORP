@@ -118,8 +118,8 @@ export default function ResourcesPage() {
                   "Lleve un registro de su presion arterial, azucar en la sangre y niveles de colesterol. Las evaluaciones regulares ayudan a detectar problemas temprano.",
               },
               {
-                enTitle: "Schedule Annual Check-Ups",
-                esTitle: "Agende Chequeos Anuales",
+                enTitle: "Schedule Annual Visits",
+                esTitle: "Agende Consultas Anuales",
                 enDesc:
                   "Even if you feel healthy, annual wellness visits are essential for preventive care. They help us build a complete picture of your health over time.",
                 esDesc:

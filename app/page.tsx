@@ -40,8 +40,8 @@ export default function HomePage() {
               <img
                 src="/images/dr-paredes-hero-800.webp"
                 alt={t(
-                  "Dr. Gustavo A. Paredes, MD, family medicine physician at Paredes Medical Corporation in Coachella, California",
-                  "Dr. Gustavo A. Paredes, MD, medico de medicina familiar en Paredes Medical Corporation en Coachella, California"
+                  "Dr. Gustavo Paredes, MD, family medicine physician at Paredes Medical Corporation in Coachella, California",
+                  "Dr. Gustavo Paredes, MD, medico de medicina familiar en Paredes Medical Corporation en Coachella, California"
                 )}
                 width={1600}
                 height={1067}
@@ -59,7 +59,7 @@ export default function HomePage() {
           {/* Text */}
           <div className="order-2 flex flex-col items-center gap-4 px-5 py-8 text-center sm:py-10 lg:order-1 lg:items-start lg:justify-center lg:px-10 lg:py-16 lg:text-left">
             <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-brand-warm-white sm:text-5xl lg:text-6xl">
-              Paredes Medical
+              Paredes Medical Corporation
             </h1>
             <p className="font-script text-3xl leading-snug text-brand-teal sm:text-4xl lg:text-5xl">
               {t("Care and Compassion You Deserve", "El Cuidado y la Compasion Que Usted Merece")}
@@ -72,12 +72,21 @@ export default function HomePage() {
               <Phone className="h-6 w-6" />
               {t("Call", "Llame al")} {SITE.phoneDisplay}
             </a>
-            <p className="max-w-lg text-base leading-relaxed text-brand-warm-white/80 sm:text-lg">
-              {t(
-                "Bilingual family medicine for the Coachella Valley. Dr. Gustavo Paredes and our caring team are here for your whole family.",
-                "Medicina familiar bilingue para el Valle de Coachella. El Dr. Gustavo Paredes y nuestro equipo estan aqui para toda su familia."
-              )}
-            </p>
+            {/* Homepage blurb: text from Diana's Nov 3 copy markup (webpage1 pp. 1-2). */}
+            <div className="flex max-w-lg flex-col gap-3 text-base leading-relaxed text-brand-warm-white/80 sm:text-lg">
+              <p>
+                {t(
+                  "At Paredes Medical Corporation, we believe good care begins with listening. Dr. Gustavo Paredes and our bilingual team take time to understand your concerns, explain your care, and help you make informed decisions about your health.",
+                  "En Paredes Medical Corporation, creemos que una buena atención comienza por escuchar. El Dr. Gustavo Paredes y nuestro equipo bilingüe se toman el tiempo para conocer sus inquietudes, explicarle su atención y ayudarle a tomar decisiones informadas sobre su salud."
+                )}
+              </p>
+              <p>
+                {t(
+                  "From preventive visits to managing ongoing conditions, we are here to build a lasting relationship with you - one grounded in trust, respect, and compassion.",
+                  "Desde las visitas preventivas hasta el control de enfermedades crónicas, queremos establecer una relación duradera con usted, basada en la confianza, el respeto y la compasión."
+                )}
+              </p>
+            </div>
             <a
               href="#award"
               className="inline-flex min-h-11 items-center gap-3 rounded-full border border-brand-warm-white/25 bg-brand-warm-white/5 py-1 pl-1 pr-4 text-sm font-semibold text-brand-warm-white transition-colors hover:bg-brand-warm-white/10"
@@ -176,8 +185,8 @@ export default function HomePage() {
             </h2>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Welcome to Paredes Medical, the medical office of Dr. Gustavo Paredes, where we believe that every patient deserves exceptional healthcare. Our mission is to provide comprehensive medical services with the genuine care and compassion every patient deserves, as though they were members of our own family.",
-                "Bienvenido a Paredes Medical, el consultorio medico del Dr. Gustavo Paredes, donde creemos que cada paciente merece una atencion medica excepcional. Nuestra mision es brindar servicios medicos integrales con el cuidado y la compasion genuinos que cada paciente merece, como si fueran miembros de nuestra propia familia."
+                "Welcome to Paredes Medical Corporation, the medical office of Dr. Gustavo Paredes, where we believe that every patient deserves exceptional healthcare. Our mission is to provide comprehensive medical services with the genuine care and compassion every patient deserves, as though they were members of our own family.",
+                "Bienvenido a Paredes Medical Corporation, el consultorio medico del Dr. Gustavo Paredes, donde creemos que cada paciente merece una atencion medica excepcional. Nuestra mision es brindar servicios medicos integrales con el cuidado y la compasion genuinos que cada paciente merece, como si fueran miembros de nuestra propia familia."
               )}
             </p>
             <p className="leading-relaxed text-muted-foreground">
@@ -216,7 +225,7 @@ export default function HomePage() {
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: Activity, en: "Routine Check-Ups & Preventive Care", es: "Chequeos de Rutina y Atencion Preventiva" },
+              { icon: Activity, en: "Routine Visits & Preventive Care", es: "Consultas de Rutina y Atencion Preventiva" },
               { icon: Stethoscope, en: "Specialized Treatments", es: "Tratamientos Especializados" },
               { icon: Heart, en: "Chronic Disease Management", es: "Manejo de Enfermedades Cronicas" },
               { icon: ClipboardList, en: "Diabetes & High Blood Pressure", es: "Diabetes y Presion Arterial Alta" },

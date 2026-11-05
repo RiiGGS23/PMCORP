@@ -33,7 +33,7 @@ export default function DoctorPage() {
           <div className="relative aspect-[3/4] w-full max-w-sm overflow-hidden rounded-xl shadow-lg">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Doctor%20with%20elderly%20male.png-yIKvdhQAleua8etVQDeqtgaE6tUqQy.jpeg"
-              alt="Dr. Gustavo A. Paredes, MD"
+              alt="Dr. Gustavo Paredes, MD"
               fill
               className="object-cover"
             />
@@ -41,7 +41,7 @@ export default function DoctorPage() {
           <div className="flex flex-1 flex-col gap-5">
             <div>
               <h2 className="text-3xl font-bold text-brand-navy md:text-4xl">
-                Gustavo A. Paredes, MD
+                Gustavo Paredes, MD
               </h2>
               <p className="mt-1 text-lg text-brand-teal font-semibold">
                 {t("Board-Certified Family Medicine Physician", "Medico de Medicina Familiar Certificado")}
