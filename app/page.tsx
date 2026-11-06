@@ -131,11 +131,10 @@ export default function HomePage() {
 
       {/* Stats Bar */}
       <section className="bg-brand-teal">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-around gap-6 px-4 py-8 text-center text-accent-foreground sm:flex-row sm:gap-4">
+        <div className="mx-auto flex max-w-4xl flex-col items-center justify-around gap-6 px-4 py-8 text-center text-accent-foreground sm:flex-row sm:gap-4">
           {[
             { icon: ShieldCheck, en: "30+ Years Experience", es: "30+ Anos de Experiencia" },
             { icon: Stethoscope, en: "Board-Certified", es: "Certificado por la Junta" },
-            { icon: Users, en: "Bilingual English / Spanish", es: "Bilingue Ingles / Espanol" },
             { icon: Heart, en: "Family-Centered Care", es: "Atencion Centrada en la Familia" },
           ].map((stat, i) => (
             <div key={i} className="flex items-center gap-3">
@@ -191,8 +190,8 @@ export default function HomePage() {
             </p>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "We are proud to offer our services in both English and Spanish, ensuring clear communication and understanding for all our patients. Dr. Paredes has over 30 years of experience in the medical field and is a board-certified Family Medicine physician.",
-                "Nos enorgullece ofrecer nuestros servicios en ingles y espanol, asegurando una comunicacion clara y comprension para todos nuestros pacientes. El Dr. Paredes tiene mas de 30 anos de experiencia en el campo de la medicina y es medico certificado en Medicina Familiar."
+                "Dr. Paredes has over 30 years of experience in the medical field and is a board-certified Family Medicine physician.",
+                "El Dr. Paredes tiene mas de 30 anos de experiencia en el campo de la medicina y es medico certificado en Medicina Familiar."
               )}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -200,11 +199,6 @@ export default function HomePage() {
                 <Link href="/about">
                   {t("More About Us", "Mas Sobre Nosotros")}
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" className="border-brand-navy text-brand-navy hover:bg-brand-navy/5">
-                <Link href="/doctor">
-                  {t("Meet Dr. Paredes", "Conozca al Dr. Paredes")}
                 </Link>
               </Button>
             </div>
@@ -264,8 +258,8 @@ export default function HomePage() {
               <img
                 src="/images/businessrate-best-of-2026-640.webp"
                 alt={t(
-                  "BusinessRate Best of 2026 Award Winner plaque (Benchmark) for Dr. Gustavo A. Paredes, MD, Family Practice Physician, Coachella, California, powered by Google Reviews",
-                  "Placa del premio BusinessRate Best of 2026 Award Winner (Benchmark) para Dr. Gustavo A. Paredes, MD, Family Practice Physician, Coachella, California, Powered by Google Reviews"
+                  "BusinessRate Best of 2026 Award Winner plaque (Benchmark) for Dr. Gustavo Paredes, MD, Family Practice Physician, Coachella, California, powered by Google Reviews",
+                  "Placa del premio BusinessRate Best of 2026 Award Winner (Benchmark) para Dr. Gustavo Paredes, MD, Family Practice Physician, Coachella, California, Powered by Google Reviews"
                 )}
                 width={640}
                 height={801}
@@ -282,7 +276,7 @@ export default function HomePage() {
               </h2>
               <p className="text-lg text-brand-warm-white/80">BusinessRate (Benchmark)</p>
               <p className="leading-relaxed text-brand-warm-white/80">
-                Dr. Gustavo A. Paredes, MD
+                Dr. Gustavo Paredes, MD
                 <br />
                 Family Practice Physician
                 <br />

@@ -62,9 +62,9 @@ export default function ResourcesPage() {
                 enTitle: "Patient Forms",
                 esTitle: "Formularios del Paciente",
                 enDesc:
-                  "New patient registration forms are available at our office. You can also request them in advance by calling us. Forms are available in English and Spanish.",
+                  "New patient registration forms are available at our office. You can also request them in advance by calling us.",
                 esDesc:
-                  "Los formularios de registro de nuevos pacientes estan disponibles en nuestra oficina. Tambien puede solicitarlos con anticipacion llamandonos. Los formularios estan disponibles en ingles y espanol.",
+                  "Los formularios de registro de nuevos pacientes estan disponibles en nuestra oficina. Tambien puede solicitarlos con anticipacion llamandonos.",
               },
               {
                 icon: Heart,
@@ -184,8 +184,8 @@ export default function ResourcesPage() {
           </h2>
           <p className="max-w-xl text-accent-foreground/80">
             {t(
-              "Our bilingual team is available Monday through Friday to assist you with any questions or concerns.",
-              "Nuestro equipo bilingue esta disponible de lunes a viernes para asistirle con cualquier pregunta o inquietud."
+              "Our team is available Monday through Friday to assist you with any questions or concerns.",
+              "Nuestro equipo esta disponible de lunes a viernes para asistirle con cualquier pregunta o inquietud."
             )}
           </p>
           <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">

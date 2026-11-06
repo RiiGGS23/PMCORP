@@ -140,8 +140,8 @@ export default function ContactPage() {
           <h2 className="text-3xl font-bold">{t("Ready to Schedule?", "Listo para Agendar?")}</h2>
           <p className="max-w-xl text-accent-foreground/80">
             {t(
-              "Call our office and our bilingual team will help you schedule your appointment.",
-              "Llame a nuestra oficina y nuestro equipo bilingue le ayudara a agendar su cita."
+              "Call our office and our team will help you schedule your appointment.",
+              "Llame a nuestra oficina y nuestro equipo le ayudara a agendar su cita."
             )}
           </p>
           <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">

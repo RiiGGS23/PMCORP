@@ -56,8 +56,8 @@ export default function AboutPage() {
             </p>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "We understand that navigating the healthcare system can be challenging, especially when language barriers exist. That is why we are proud to offer our services in both English and Spanish, ensuring clear communication and understanding for all our patients. Our bilingual team of experienced healthcare professionals is committed to making your visit as comfortable and efficient as possible.",
-                "Entendemos que navegar el sistema de salud puede ser dificil, especialmente cuando existen barreras de idioma. Por eso nos enorgullece ofrecer nuestros servicios en ingles y espanol, asegurando una comunicacion clara y comprension para todos nuestros pacientes. Nuestro equipo bilingue de profesionales de la salud con experiencia esta comprometido a hacer que su visita sea lo mas comoda y eficiente posible."
+                "We understand that navigating the healthcare system can be challenging. Our team of experienced healthcare professionals is committed to making your visit as comfortable and efficient as possible.",
+                "Entendemos que navegar el sistema de salud puede ser dificil. Nuestro equipo de profesionales de la salud con experiencia esta comprometido a hacer que su visita sea lo mas comoda y eficiente posible."
               )}
             </p>
             <p className="leading-relaxed text-muted-foreground">
