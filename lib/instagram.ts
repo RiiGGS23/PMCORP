@@ -40,12 +40,19 @@ export const BLOCKED_INSTAGRAM_SHORTCODES: readonly string[] = [
   "DajS5xqGbbp",
   // Procedure/Botox-type content, not suitable for the medical site.
   "DAk78spJXdU",
+  // Patient-related content (explicit patient / patient-identifying raffle winner). Never display.
+  "DbzCujzvvWU",
+  "DYN0eToP8yh",
+  // Diabetes advice graphic: not clinically reviewed for the website.
+  "DLP84MOud1O",
 ]
 
 // EMPTY until vetted, already-published post URLs are supplied. Do not fill with guesses.
 export const CURATED_INSTAGRAM_POSTS: readonly CuratedInstagramPost[] = []
 
-const PERMALINK = /^https:\/\/(?:www\.)?instagram\.com\/(p|reel)\/([A-Za-z0-9_-]{5,20})\/?(?:\?.*)?$/
+// Accepts /p/{code}/, /reel/{code}/ and the profile-scoped /{username}/p/{code}/ form;
+// always normalized to the canonical /p|reel/{code}/ permalink documented for embeds.
+const PERMALINK = /^https:\/\/(?:www\.)?instagram\.com\/(?:[A-Za-z0-9._]{1,30}\/)?(p|reel)\/([A-Za-z0-9_-]{5,20})\/?(?:\?.*)?$/
 
 export type DisplayableInstagramPost = CuratedInstagramPost & { shortcode: string; permalink: string }
 
