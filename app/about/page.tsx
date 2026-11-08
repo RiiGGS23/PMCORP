@@ -1,11 +1,17 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
-import { Phone, ArrowRight } from "lucide-react"
+import { Phone, GraduationCap, ImageOff } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
+import { ReviewPlaceholder } from "@/components/review-placeholder"
+
+// Copy from Diana's draft: About Us EN (webpage2 p.7) / Conózcanos ES (webpage1 p.3),
+// with her markup applied (Corporation, no "A.", English/Spanish line struck).
+// Per the Nov 7 relayed decision, About shows only the doctor bio; staff mini-bios are
+// removed and staff appear as photos only. No staff names or NP details until supplied.
+const STAFF_PHOTO_SLOTS = 8 // Diana drew 8 "PIC" boxes on webpage2 p.7
 
 export default function AboutPage() {
   const { t } = useLanguage()
@@ -15,99 +21,152 @@ export default function AboutPage() {
       {/* Page header */}
       <section className="bg-brand-navy">
         <div className="mx-auto max-w-7xl px-4 py-16 text-center md:py-20">
-          <h1 className="text-4xl font-bold text-brand-warm-white md:text-5xl">
-            {t("About Us", "Sobre Nosotros")}
+          <h1 className="text-balance text-4xl font-bold text-brand-warm-white md:text-5xl">
+            {t("Get to Know Paredes Medical Corporation", "Conozca Paredes Medical Corporation")}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/70">
-            {t(
-              "The medical office of Dr. Gustavo Paredes in Coachella, CA.",
-              "El consultorio medico del Dr. Gustavo Paredes en Coachella, CA."
-            )}
-          </p>
         </div>
       </section>
 
-      {/* Mission */}
+      {/* Intro */}
       <section className="bg-background">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-16 md:flex-row md:py-20">
-          <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-xl shadow-lg">
+        <div className="mx-auto max-w-4xl px-4 py-14 md:py-16">
+          <h2 className="text-2xl font-bold text-brand-navy md:text-3xl">
+            {t("Personal Care. Lasting Relationships.", "Atención personal. Relaciones duraderas.")}
+          </h2>
+          <div className="mt-4 flex flex-col gap-4 leading-relaxed text-muted-foreground">
+            <p>
+              {t(
+                "At Paredes Medical Corporation, we want you to feel heard, respected, and comfortable asking questions. We believe that understanding your health is an important part of caring for it.",
+                "En Paredes Medical Corporation, queremos que usted se sienta escuchado, respetado y con la confianza de hacer preguntas. Creemos que comprender su salud es una parte importante de cuidarla."
+              )}
+            </p>
+            <p>
+              {t(
+                "Our approach combines preventive care, management of ongoing conditions, and guidance that considers your individual needs. We explain recommendations clearly and work with you to develop a care plan you understand.",
+                "Nuestro enfoque combina la prevención, el control de enfermedades crónicas y la orientación de acuerdo con sus necesidades. Le explicamos nuestras recomendaciones con claridad y trabajamos con usted para desarrollar un plan de atención que comprenda."
+              )}
+            </p>
+            <p>
+              {t(
+                "Our team helps patients and families feel more confident navigating their healthcare.",
+                "Nuestro equipo ayuda a los pacientes y sus familias a sentirse más seguros al atender sus necesidades de salud."
+              )}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Doctor bio */}
+      <section className="bg-secondary">
+        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-14 md:flex-row md:py-16">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-sm shrink-0 overflow-hidden rounded-xl shadow-lg">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero%20Banner-LIxmb6nzHRtV7xX7ztmNNUjfEDBeNy.jpg"
-              alt={t("Paredes Medical Corporation team", "Equipo de Paredes Medical Corporation")}
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Doctor%20with%20elderly%20male.png-yIKvdhQAleua8etVQDeqtgaE6tUqQy.jpeg"
+              alt={t("Dr. Gustavo Paredes, M.D.", "Dr. Gustavo Paredes")}
               fill
               className="object-cover"
             />
           </div>
-          <div className="flex flex-1 flex-col gap-5">
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-teal">
-              {t("Our Mission", "Nuestra Mision")}
-            </p>
-            <h2 className="text-balance text-3xl font-bold text-brand-navy md:text-4xl">
-              {t(
-                "Professional Care You Can Trust",
-                "Atencion Profesional en la Que Puede Confiar"
-              )}
+          <div className="flex flex-1 flex-col gap-4">
+            <h2 className="text-3xl font-bold text-brand-navy">
+              {t("Meet Gustavo Paredes, M.D.", "Conozca al Dr. Gustavo Paredes")}
             </h2>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Welcome to Paredes Medical Corporation, the medical office of Dr. Gustavo Paredes, where we believe that every patient deserves exceptional healthcare. Our mission is to provide comprehensive medical services with the genuine care and compassion every patient deserves, as though they were members of our own family.",
-                "Bienvenido a Paredes Medical Corporation, el consultorio medico del Dr. Gustavo Paredes, donde creemos que cada paciente merece una atencion medica excepcional. Nuestra mision es brindar servicios medicos integrales con el cuidado y la compasion genuinos que cada paciente merece, como si fueran miembros de nuestra propia familia."
+                "Dr. Gustavo Paredes is a family medicine physician with additional fellowship training in geriatrics. Originally from Guatemala, he brings a personal commitment to serving the community and building meaningful relationships with his patients.",
+                "El Dr. Gustavo Paredes es médico de medicina familiar con formación adicional en geriatría, el cuidado de la salud de los adultos mayores. Originario de Guatemala, tiene un compromiso personal con el servicio a la comunidad y con establecer relaciones de confianza con sus pacientes."
               )}
             </p>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "We understand that navigating the healthcare system can be challenging. Our team of experienced healthcare professionals is committed to making your visit as comfortable and efficient as possible.",
-                "Entendemos que navegar el sistema de salud puede ser dificil. Nuestro equipo de profesionales de la salud con experiencia esta comprometido a hacer que su visita sea lo mas comoda y eficiente posible."
+                "He believes prevention and patient education are central to good care. Whether discussing a new concern, managing an ongoing condition, or helping a patient navigate changes that come with aging, he takes time to listen and explain the next steps.",
+                "Considera que la prevención y la educación del paciente son fundamentales para una buena atención. Ya sea al evaluar una nueva inquietud, controlar una enfermedad crónica o acompañar a un paciente en los cambios propios de la edad, se toma el tiempo para escuchar y explicar los siguientes pasos."
+              )}
+            </p>
+
+            <h3 className="mt-2 flex items-center gap-2 text-xl font-bold text-brand-navy">
+              <GraduationCap className="h-5 w-5 text-brand-teal" aria-hidden="true" />
+              {t("Education and Training", "Formación médica")}
+            </h3>
+            <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground">
+              <li>
+                {t(
+                  "Medical degree: Universidad de San Carlos de Guatemala, Guatemala City, Guatemala.",
+                  "Título de Médico y Cirujano: Universidad de San Carlos de Guatemala, Ciudad de Guatemala, Guatemala."
+                )}
+              </li>
+              <li>
+                {t(
+                  "Family Medicine residency: Hospital Bella Vista, Mayagüez, Puerto Rico.",
+                  "Residencia en Medicina Familiar: Hospital Bella Vista, Mayagüez, Puerto Rico."
+                )}
+              </li>
+              <li>
+                {t(
+                  "Geriatrics fellowship: University of Puerto Rico / Veterans Affairs Caribbean Healthcare System, San Juan, Puerto Rico.",
+                  "Formación adicional mediante un fellowship en Geriatría: Universidad de Puerto Rico / Veterans Affairs Caribbean Healthcare System, San Juan, Puerto Rico."
+                )}
+              </li>
+            </ul>
+            <p className="leading-relaxed text-muted-foreground">
+              {t(
+                "Earlier in his career, Dr. Paredes worked at the University of Southern California's General Clinical Research Center, supporting research related to the genetics and prevention of diabetes in the Hispanic community.",
+                "Al inicio de su carrera, el Dr. Paredes trabajó en el Centro de Investigación Clínica General de la Universidad del Sur de California, colaborando en investigaciones relacionadas con la genética y la prevención de la diabetes en la comunidad hispana."
               )}
             </p>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Our office offers a wide range of services, from routine visits and preventive care to specialized treatments and chronic disease management, including diabetes, high blood pressure, asthma, weight management, kidney issues, and cholesterol problems. We have access to one of the largest networks of specialists in the Coachella Valley, and we work closely with them to manage your specific healthcare needs. Patient-centered care is our priority, and we take the time to listen to your concerns and work with you to develop a personalized treatment plan.",
-                "Nuestra oficina ofrece una amplia gama de servicios, desde consultas de rutina y atencion preventiva hasta tratamientos especializados y manejo de enfermedades cronicas, incluyendo diabetes, presion arterial alta, asma, control de peso, problemas de los rinones y problemas de colesterol. Tenemos acceso a una de las redes de especialistas mas grandes del Valle de Coachella, y trabajamos de cerca con ellos para atender sus necesidades de salud especificas. La atencion centrada en el paciente es nuestra prioridad; nos tomamos el tiempo de escuchar sus inquietudes y trabajamos con usted para desarrollar un plan de tratamiento personalizado."
+                "Outside the office, he enjoys spending time with his family and pets and volunteering at his local church.",
+                "Fuera del consultorio, disfruta pasar tiempo con su familia y sus mascotas y servir como voluntario en su iglesia local."
               )}
-            </p>
-            <p className="leading-relaxed text-muted-foreground">
-              {t(
-                "Here at Paredes Medical Corporation, your health and well-being are our top priorities. We strive to create a welcoming and supportive environment where you can feel confident that you are receiving the highest quality care. We are here to support you every step of the way on your health journey.",
-                "Aqui en Paredes Medical Corporation, su salud y bienestar son nuestras principales prioridades. Nos esforzamos por crear un ambiente acogedor y de apoyo donde pueda sentirse seguro de que esta recibiendo la atencion de mas alta calidad. Estamos aqui para apoyarle en cada paso de su camino hacia la salud."
-              )}
-            </p>
-            <p className="font-semibold text-brand-navy">
-              Dr. Gustavo Paredes, {t("President / CEO", "Presidente / Director General")}
-              <br />
-              Paredes Medical Corporation
-            </p>
-            <p className="font-serif text-xl italic text-brand-teal">
-              {t("Care and Compassion You Deserve!", "El Cuidado y la Compasion Que Usted Merece!")}
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Team: photos only */}
+      <section id="team" className="scroll-mt-24 bg-background">
+        <div className="mx-auto max-w-6xl px-4 py-14 md:py-16">
+          <h2 className="text-3xl font-bold text-brand-navy">{t("Meet Our Team", "Conozca a nuestro equipo")}</h2>
+          <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
+            {t(
+              "From your first phone call to the end of your visit, our team is here to welcome you, answer questions, and help coordinate your care.",
+              "Desde su primera llamada hasta el final de su visita, nuestro equipo está aquí para darle la bienvenida, responder sus preguntas y ayudar a coordinar su atención."
+            )}
+          </p>
+          <ReviewPlaceholder
+            className="mt-6"
+            en="Staff photos have not been supplied yet. Slots below are empty placeholders; no names or captions until Diana sends the photos. Nurse practitioner bio deferred until the doctor decides."
+            es="Aún no se han recibido las fotos del personal. Los espacios son marcadores vacíos; sin nombres ni descripciones hasta que Diana envíe las fotos. La biografía de la enfermera practicante queda pendiente de la decisión del doctor."
+          />
+          <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {Array.from({ length: STAFF_PHOTO_SLOTS }).map((_, i) => (
+              <li
+                key={i}
+                className="flex aspect-[3/4] flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-secondary text-muted-foreground"
+              >
+                <ImageOff className="h-8 w-8" aria-hidden="true" />
+                <span className="text-xs font-semibold uppercase tracking-wide">
+                  {t("Photo pending", "Foto pendiente")}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 font-script text-3xl text-brand-teal">
+            {t("Care and Compassion You Deserve.", "El cuidado y la compasión que usted merece.")}
+          </p>
         </div>
       </section>
 
       {/* CTA */}
       <section className="bg-brand-teal">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-4 py-14 text-center text-accent-foreground">
-          <h2 className="text-3xl font-bold">{t("Ready to Join Our Family?", "Listo para Unirse a Nuestra Familia?")}</h2>
-          <p className="max-w-xl text-accent-foreground/80">
-            {t(
-              "Call our office today to schedule your visit.",
-              "Llame a nuestra oficina hoy para agendar su visita."
-            )}
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
-              <a href={SITE.phoneHref}>
-                <Phone className="mr-2 h-5 w-5" />
-                (760) 972-4704
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-accent-foreground text-accent-foreground hover:bg-accent-foreground/10">
-              <Link href="/staff">
-                {t("Meet Our Staff", "Conozca a Nuestro Equipo")}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+          <Button asChild size="lg" className="min-h-12 bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
+            <a href={SITE.phoneHref}>
+              <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
+              {t("Call", "Llame al")} {SITE.phoneDisplay}
+            </a>
+          </Button>
         </div>
       </section>
     </div>

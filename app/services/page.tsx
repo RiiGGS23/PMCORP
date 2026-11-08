@@ -1,52 +1,60 @@
 "use client"
 
-import { Phone, Activity, Stethoscope, Heart, CheckCircle2 } from "lucide-react"
+import { Phone, ShieldCheck, Heart, Stethoscope, Users, Network } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
-// Services as listed on paredesmedicalcorp.com (About Us and home page "Why have a PCP?").
+// Copy from Diana's draft: Our Services EN (webpage2 p.6) / Nuestros servicios ES (webpage1 p.4),
+// with "Corporation" added per her markup. The Spanish headline is Diana's draft text and still
+// needs final confirmation (a different wording was relayed from the Nov 7 call).
 const services = [
   {
-    icon: Activity,
-    enTitle: "Routine Visits & Preventive Care",
-    esTitle: "Consultas de Rutina y Atencion Preventiva",
-    enDesc: "Regular visits and annual wellness and prevention exams to assess your overall health and catch potential issues early.",
-    esDesc: "Consultas regulares y examenes anuales de bienestar y prevencion para evaluar su salud general y detectar problemas a tiempo.",
-  },
-  {
-    icon: Stethoscope,
-    enTitle: "Specialized Treatments",
-    esTitle: "Tratamientos Especializados",
-    enDesc: "We have access to one of the largest networks of specialists in the Coachella Valley, and we work closely with them to manage your specific healthcare needs.",
-    esDesc: "Tenemos acceso a una de las redes de especialistas mas grandes del Valle de Coachella, y trabajamos de cerca con ellos para atender sus necesidades de salud especificas.",
+    icon: ShieldCheck,
+    enTitle: "Preventive Care",
+    esTitle: "Atención preventiva",
+    enDesc:
+      "Routine visits give us an opportunity to review your health, discuss recommended screenings and vaccines, and identify steps that may help reduce future health risks.",
+    esDesc:
+      "Las consultas de rutina nos permiten revisar su salud, conversar sobre las pruebas de detección y vacunas recomendadas, e identificar medidas que pueden ayudar a reducir riesgos futuros.",
   },
   {
     icon: Heart,
-    enTitle: "Chronic Disease Management",
-    esTitle: "Manejo de Enfermedades Cronicas",
-    enDesc: "Ongoing care for chronic conditions, with a personalized treatment plan developed with you.",
-    esDesc: "Atencion continua para condiciones cronicas, con un plan de tratamiento personalizado desarrollado junto con usted.",
+    enTitle: "Management of Ongoing Conditions",
+    esTitle: "Control de enfermedades crónicas",
+    enDesc:
+      "We help patients manage conditions such as diabetes, high blood pressure, high cholesterol, and asthma. Your care may include reviewing medications, monitoring your progress, and discussing practical changes to support your health.",
+    esDesc:
+      "Ayudamos a los pacientes a controlar enfermedades como la diabetes, la presión arterial alta, el colesterol alto y el asma. Su atención puede incluir la revisión de medicamentos, el seguimiento de su progreso y recomendaciones prácticas para cuidar su salud.",
   },
-]
-
-const chronicConditions = [
-  { en: "Diabetes", es: "Diabetes" },
-  { en: "High blood pressure", es: "Presion arterial alta" },
-  { en: "Asthma", es: "Asma" },
-  { en: "Weight management", es: "Control de peso" },
-  { en: "Kidney issues", es: "Problemas de los rinones" },
-  { en: "Cholesterol problems", es: "Problemas de colesterol" },
-]
-
-const pcpRoles = [
-  { en: "Advocating for your needs and providing guidance.", es: "Abogar por sus necesidades y brindarle orientacion." },
-  { en: "Diagnosing and managing chronic conditions like diabetes and high blood pressure.", es: "Diagnosticar y manejar condiciones cronicas como la diabetes y la presion arterial alta." },
-  { en: "Monitoring your health through regular visits.", es: "Vigilar su salud mediante consultas regulares." },
-  { en: "Conducting annual wellness and prevention exams to assess your overall health and catch potential issues early.", es: "Realizar examenes anuales de bienestar y prevencion para evaluar su salud general y detectar problemas a tiempo." },
-  { en: "Educating you on healthy lifestyle choices to prevent health issues.", es: "Educarle sobre habitos de vida saludables para prevenir problemas de salud." },
-  { en: "Coordinating care with specialists, pharmacists and other healthcare providers.", es: "Coordinar su atencion con especialistas, farmaceuticos y otros proveedores de salud." },
+  {
+    icon: Stethoscope,
+    enTitle: "Common Illnesses and New Concerns",
+    esTitle: "Enfermedades comunes y nuevas inquietudes",
+    enDesc:
+      "When a new health concern arises, our office can help you determine the next step. Call to discuss appointment availability.",
+    esDesc:
+      "Si presenta una nueva inquietud de salud, nuestra oficina puede ayudarle a determinar el siguiente paso. Llame para consultar la disponibilidad de citas.",
+  },
+  {
+    icon: Users,
+    enTitle: "Care for Older Adults",
+    esTitle: "Atención para adultos mayores",
+    enDesc:
+      "We consider the needs that can come with aging, including medication management, changes in memory or mobility, and maintaining independence. When appropriate and with your permission, we involve family members or caregivers in your care.",
+    esDesc:
+      "Tomamos en cuenta las necesidades que pueden surgir con la edad, como el manejo de medicamentos, los cambios en la memoria o movilidad y la conservación de la independencia. Cuando corresponde y con su autorización, involucramos a familiares o cuidadores en su atención.",
+  },
+  {
+    icon: Network,
+    enTitle: "Coordination of Care",
+    esTitle: "Coordinación de su atención",
+    enDesc:
+      "We work with specialists and other healthcare professionals to help coordinate your care. We also review recommendations and records from outside visits to better understand your overall health.",
+    esDesc:
+      "Colaboramos con especialistas y otros profesionales de la salud para ayudar a coordinar su atención. También revisamos recomendaciones y registros de consultas externas para comprender mejor su salud en general.",
+  },
 ]
 
 export default function ServicesPage() {
@@ -57,29 +65,32 @@ export default function ServicesPage() {
       {/* Page header */}
       <section className="bg-brand-navy">
         <div className="mx-auto max-w-7xl px-4 py-16 text-center md:py-20">
-          <h1 className="text-4xl font-bold text-brand-warm-white md:text-5xl">
-            {t("Our Services", "Nuestros Servicios")}
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-teal">
+            {t("Our Services", "Nuestros servicios")}
+          </p>
+          <h1 className="mt-2 text-balance text-4xl font-bold text-brand-warm-white md:text-5xl">
+            {t("Care That Starts with You", "Atención que comienza con usted")}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/70">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/80">
             {t(
-              "From routine visits and preventive care to specialized treatments and chronic disease management.",
-              "Desde consultas de rutina y atencion preventiva hasta tratamientos especializados y manejo de enfermedades cronicas."
+              "Your health needs can change over time. At Paredes Medical Corporation, we provide primary care that supports prevention, addresses current concerns, and helps you manage ongoing conditions.",
+              "Sus necesidades de salud pueden cambiar con el tiempo. En Paredes Medical Corporation, ofrecemos atención primaria enfocada en la prevención, la evaluación de sus inquietudes y el control de enfermedades crónicas."
             )}
           </p>
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Services */}
       <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="grid gap-6 md:grid-cols-3">
-            {services.map((service, i) => (
-              <Card key={i} className="border-0 shadow-sm transition-shadow hover:shadow-md">
+        <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => (
+              <Card key={service.enTitle} className="border-0 shadow-sm">
                 <CardContent className="flex flex-col gap-3 p-6">
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-teal/10">
-                    <service.icon className="h-6 w-6 text-brand-teal" />
+                    <service.icon className="h-6 w-6 text-brand-teal" aria-hidden="true" />
                   </div>
-                  <h3 className="text-lg font-bold text-brand-navy">{t(service.enTitle, service.esTitle)}</h3>
+                  <h2 className="text-lg font-bold text-brand-navy">{t(service.enTitle, service.esTitle)}</h2>
                   <p className="text-sm leading-relaxed text-muted-foreground">{t(service.enDesc, service.esDesc)}</p>
                 </CardContent>
               </Card>
@@ -88,71 +99,20 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Chronic conditions */}
-      <section className="bg-secondary">
-        <div className="mx-auto max-w-5xl px-4 py-16 md:py-20">
-          <h2 className="mb-8 text-center text-3xl font-bold text-brand-navy">
-            {t("Chronic Conditions We Manage", "Condiciones Cronicas Que Manejamos")}
-          </h2>
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {chronicConditions.map((c) => (
-              <li key={c.en} className="flex items-center gap-3 rounded-lg bg-card p-4 shadow-sm">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-brand-teal" />
-                <span className="font-semibold text-brand-navy">{t(c.en, c.es)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Why have a PCP? */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-4xl px-4 py-16 md:py-20">
-          <p className="text-center text-sm font-semibold uppercase tracking-wider text-brand-teal">
-            {t("Why Choose Us", "Por Que Elegirnos")}
-          </p>
-          <h2 className="mt-2 text-center text-3xl font-bold text-brand-navy">
-            {t("Why Have a PCP?", "Por Que Tener un Medico de Cabecera (PCP)?")}
-          </h2>
-          <p className="mt-6 leading-relaxed text-muted-foreground">
-            {t(
-              "Having a Primary Care Provider (PCP) ensures you have a consistent point of contact for all your healthcare needs. Your PCP is your go-to for medical care and your entry point into the healthcare system. He plays a crucial role in managing your overall health by:",
-              "Tener un Proveedor de Atencion Primaria (PCP) le asegura un punto de contacto constante para todas sus necesidades de salud. Su PCP es su referencia para la atencion medica y su punto de entrada al sistema de salud. Su PCP tiene un papel fundamental en el manejo de su salud general al:"
-            )}
-          </p>
-          <ul className="mt-6 flex flex-col gap-3">
-            {pcpRoles.map((r) => (
-              <li key={r.en} className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" />
-                <span className="text-muted-foreground">{t(r.en, r.es)}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 font-semibold text-brand-navy">
-            {t(
-              "Don't forget to call your health insurance plan and select your PCP today and begin your journey to a healthier, happier you!",
-              "No olvide llamar a su plan de seguro medico y seleccionar a su PCP hoy mismo para comenzar su camino hacia una vida mas sana y feliz!"
-            )}
-          </p>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="bg-brand-teal">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-4 py-14 text-center text-accent-foreground">
-          <h2 className="text-3xl font-bold">
-            {t("Have a Question About Our Services?", "Tiene Alguna Pregunta Sobre Nuestros Servicios?")}
-          </h2>
-          <p className="max-w-xl text-accent-foreground/80">
+          <h2 className="text-3xl font-bold">{t("Questions About a Service?", "¿Tiene preguntas sobre algún servicio?")}</h2>
+          <p className="max-w-xl text-accent-foreground/90">
             {t(
-              "Call our office. We are happy to answer your questions and help you schedule an appointment.",
-              "Llame a nuestra oficina. Con gusto respondemos sus preguntas y le ayudamos a agendar una cita."
+              `Call ${SITE.phoneDisplay}. Our team can help you determine whether our office provides the care you need.`,
+              `Llame al ${SITE.phoneDisplay}. Nuestro equipo puede ayudarle a determinar si ofrecemos la atención que necesita.`
             )}
           </p>
-          <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
+          <Button asChild size="lg" className="min-h-12 bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
             <a href={SITE.phoneHref}>
-              <Phone className="mr-2 h-5 w-5" />
-              (760) 972-4704
+              <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
+              {t("Call", "Llame al")} {SITE.phoneDisplay}
             </a>
           </Button>
         </div>

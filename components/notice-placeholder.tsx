@@ -15,7 +15,7 @@ export function NoticePlaceholder({ titleEn, titleEs }: { titleEn: string; title
         <p className="text-lg text-muted-foreground">
           {t(
             "Notice coming soon. In the meantime, please call the office.",
-            "Aviso proximamente. Mientras tanto, por favor llame a la oficina."
+            "Aviso próximamente. Mientras tanto, por favor llame a la oficina."
           )}
         </p>
         <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">

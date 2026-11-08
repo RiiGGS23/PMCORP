@@ -1,199 +1,214 @@
 "use client"
 
-import {
-  Phone,
-  FileText,
-  ClipboardList,
-  Heart,
-  AlertTriangle,
-  Lightbulb,
-  ArrowRight,
-} from "lucide-react"
+import { Phone, CheckCircle2, ExternalLink, Instagram, FileText } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
-import { SITE } from "@/lib/site"
+import { SITE, DOHC } from "@/lib/site"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { ReviewPlaceholder } from "@/components/review-placeholder"
+
+// Copy from Diana's draft: Patient Resources EN (webpage2 p.3) / Recursos para pacientes ES
+// (webpage1 p.7). Her markup: "Forms and Health Education" -> "Additional Resources" (ES
+// "recursos adicionales"), link forms and DOHC resources, and "Call me for wording here" on
+// Prescription Refills / Test Results. Nothing below links to a file or URL we don't have.
+const additionalResources = [
+  {
+    en: "New-patient forms",
+    es: "Formularios para nuevos pacientes",
+    pendingEn: "form file or link not supplied yet",
+    pendingEs: "aún no se ha recibido el archivo o enlace del formulario",
+  },
+  {
+    en: "Records request forms",
+    es: "Formularios para solicitar registros médicos",
+    pendingEn: "form file or link not supplied yet",
+    pendingEs: "aún no se ha recibido el archivo o enlace del formulario",
+  },
+  {
+    en: "Health education (DOHC)",
+    es: "Información educativa (DOHC)",
+    pendingEn: "exact DOHC link pending from Diana",
+    pendingEs: "enlace exacto de DOHC pendiente de Diana",
+  },
+  {
+    en: "DOHC patient resources page",
+    es: "Página de recursos para pacientes de DOHC",
+    pendingEn: "exact DOHC link pending from Diana",
+    pendingEs: "enlace exacto de DOHC pendiente de Diana",
+  },
+  {
+    en: "Educational videos featuring Dr. Paredes",
+    es: "Videos educativos con el Dr. Paredes",
+    pendingEn: "video links not supplied yet",
+    pendingEs: "aún no se han recibido los enlaces de los videos",
+  },
+  {
+    en: "Health-plan classes and community resources",
+    es: "Clases del plan de salud y recursos comunitarios",
+    pendingEn: "approved links not supplied yet",
+    pendingEs: "aún no se han recibido los enlaces aprobados",
+  },
+]
 
 export default function ResourcesPage() {
   const { t } = useLanguage()
 
   return (
     <div className="flex flex-col">
-      {/* Page header */}
       <section className="bg-brand-navy">
         <div className="mx-auto max-w-7xl px-4 py-16 text-center md:py-20">
-          <h1 className="text-4xl font-bold text-brand-warm-white md:text-5xl">
-            {t("Patient Resources", "Recursos para Pacientes")}
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-teal">
+            {t("Patient Resources", "Recursos para pacientes")}
+          </p>
+          <h1 className="mt-2 text-balance text-4xl font-bold text-brand-warm-white md:text-5xl">
+            {t("Information to Help You Prepare", "Información para prepararse para su visita")}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/70">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/80">
             {t(
-              "Helpful information to prepare for your visit and manage your health.",
-              "Informacion util para prepararse para su visita y manejar su salud."
+              "We want you to feel informed and ready for your visit. Here you will find practical information, patient forms, and educational resources.",
+              "Queremos que usted se sienta informado y preparado para su consulta. Aquí encontrará información práctica, formularios y recursos educativos."
             )}
           </p>
         </div>
       </section>
 
-      {/* New Patient Section */}
       <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="mb-10 text-center">
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-teal">
-              {t("Getting Started", "Para Comenzar")}
-            </p>
-            <h2 className="mt-2 text-3xl font-bold text-brand-navy">
-              {t("New Patient Information", "Informacion para Nuevos Pacientes")}
-            </h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto max-w-4xl px-4 py-14 md:py-16">
+          <h2 className="text-2xl font-bold text-brand-navy md:text-3xl">
+            {t("Preparing for Your First Visit", "Cómo prepararse para su primera visita")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{t("Please bring:", "Por favor, traiga:")}</p>
+          <ul className="mt-3 flex flex-col gap-3">
             {[
+              { en: "Your photo identification and current insurance card.", es: "Su identificación con fotografía y tarjeta de seguro vigente." },
+              { en: "A current list of medications, including vitamins and supplements.", es: "Una lista actualizada de sus medicamentos, incluyendo vitaminas y suplementos." },
+              { en: "Your medication bottles if you are unsure what you take.", es: "Los envases de sus medicamentos si no está seguro de cuáles toma." },
               {
-                icon: FileText,
-                enTitle: "What to Bring",
-                esTitle: "Que Traer",
-                enDesc:
-                  "Please bring a valid photo ID, your insurance card, a list of current medications, and any relevant medical records or referral forms.",
-                esDesc:
-                  "Por favor traiga una identificacion con foto valida, su tarjeta de seguro, una lista de medicamentos actuales y cualquier registro medico relevante o formularios de referencia.",
+                en: "Any relevant medical records or information about recent hospital, emergency room, or specialist visits.",
+                es: "Registros médicos relevantes o información sobre visitas recientes al hospital, a la sala de emergencias o con especialistas.",
               },
-              {
-                icon: ClipboardList,
-                enTitle: "Patient Forms",
-                esTitle: "Formularios del Paciente",
-                enDesc:
-                  "New patient registration forms are available at our office. You can also request them in advance by calling us.",
-                esDesc:
-                  "Los formularios de registro de nuevos pacientes estan disponibles en nuestra oficina. Tambien puede solicitarlos con anticipacion llamandonos.",
-              },
-              {
-                icon: Heart,
-                enTitle: "Your First Visit",
-                esTitle: "Su Primera Visita",
-                enDesc:
-                  "Please arrive 15 minutes early to complete paperwork. Dr. Paredes will take the time to get to know you and discuss your health history and goals.",
-                esDesc:
-                  "Por favor llegue 15 minutos antes para completar la documentacion. El Dr. Paredes se tomara el tiempo para conocerle y hablar sobre su historial de salud y metas.",
-              },
-            ].map((item, i) => (
-              <Card key={i} className="border-0 shadow-sm">
-                <CardContent className="flex flex-col gap-4 p-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-teal/10">
-                    <item.icon className="h-6 w-6 text-brand-teal" />
-                  </div>
-                  <h3 className="text-lg font-bold text-brand-navy">{t(item.enTitle, item.esTitle)}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{t(item.enDesc, item.esDesc)}</p>
-                </CardContent>
-              </Card>
+              { en: "A list of questions or concerns you would like to discuss.", es: "Una lista de las preguntas o inquietudes que desea conversar con el médico." },
+            ].map((item) => (
+              <li key={item.en} className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" aria-hidden="true" />
+                <span className="text-foreground">{t(item.en, item.es)}</span>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
 
-      {/* Health Tips */}
-      <section className="bg-secondary">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="mb-10 text-center">
-            <Lightbulb className="mx-auto mb-3 h-8 w-8 text-brand-teal" />
-            <h2 className="text-3xl font-bold text-brand-navy">
-              {t("Health Tips", "Consejos de Salud")}
-            </h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            {[
-              {
-                enTitle: "Stay Hydrated in the Desert",
-                esTitle: "Mantengase Hidratado en el Desierto",
-                enDesc:
-                  "Living in the Coachella Valley means extra heat exposure. Drink at least 8 glasses of water daily, and more during outdoor activity. Look out for signs of heat exhaustion.",
-                esDesc:
-                  "Vivir en el Valle de Coachella significa exposicion extra al calor. Beba al menos 8 vasos de agua al dia, y mas durante actividad al aire libre. Este atento a los signos de agotamiento por calor.",
-              },
-              {
-                enTitle: "Know Your Numbers",
-                esTitle: "Conozca Sus Numeros",
-                enDesc:
-                  "Keep track of your blood pressure, blood sugar, and cholesterol levels. Regular screenings help catch issues early and keep chronic conditions under control.",
-                esDesc:
-                  "Lleve un registro de su presion arterial, azucar en la sangre y niveles de colesterol. Las evaluaciones regulares ayudan a detectar problemas temprano.",
-              },
-              {
-                enTitle: "Schedule Annual Visits",
-                esTitle: "Agende Consultas Anuales",
-                enDesc:
-                  "Even if you feel healthy, annual wellness visits are essential for preventive care. They help us build a complete picture of your health over time.",
-                esDesc:
-                  "Aun si se siente saludable, las visitas anuales de bienestar son esenciales para la atencion preventiva. Nos ayudan a construir una imagen completa de su salud.",
-              },
-              {
-                enTitle: "Manage Stress",
-                esTitle: "Maneje el Estres",
-                enDesc:
-                  "Mental health is just as important as physical health. If you are feeling overwhelmed, talk to Dr. Paredes about strategies and resources that can help.",
-                esDesc:
-                  "La salud mental es tan importante como la salud fisica. Si se siente abrumado, hable con el Dr. Paredes sobre estrategias y recursos que pueden ayudar.",
-              },
-            ].map((tip, i) => (
-              <Card key={i} className="border-0 bg-card shadow-sm">
-                <CardContent className="p-6">
-                  <h3 className="mb-2 text-lg font-bold text-brand-navy">{t(tip.enTitle, tip.esTitle)}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{t(tip.enDesc, tip.esDesc)}</p>
-                </CardContent>
-              </Card>
+          <h2 className="mt-10 text-2xl font-bold text-brand-navy md:text-3xl">{t("Prescription Refills", "Renovación de recetas")}</h2>
+          <p className="mt-4 leading-relaxed text-muted-foreground">
+            {t(
+              "Please contact our office before you run out of medication. Have the medication name, dose, and pharmacy information available. Our team will review your request and let you know whether a follow-up visit or additional information is needed.",
+              "Comuníquese con nuestra oficina antes de que se le termine su medicamento. Tenga a la mano el nombre del medicamento, la dosis y la información de su farmacia. Nuestro equipo revisará su solicitud y le informará si necesita una consulta de seguimiento o información adicional."
+            )}
+          </p>
+
+          <h2 className="mt-10 text-2xl font-bold text-brand-navy md:text-3xl">
+            {t("Test Results and Referrals", "Resultados y referencias a especialistas")}
+          </h2>
+          <p className="mt-4 leading-relaxed text-muted-foreground">
+            {t(
+              "If you have questions about a test result or pending referral, call our office. Please let us know when and where the test was completed or which specialist you were referred to so we can assist you.",
+              "Si tiene preguntas sobre un resultado o una referencia pendiente, llame a nuestra oficina. Indíquenos cuándo y dónde se realizó el estudio o a qué especialista fue referido para que podamos ayudarle."
+            )}
+          </p>
+          <ReviewPlaceholder
+            className="mt-4"
+            en="Prescription Refills and Test Results wording is draft text. Diana asked to give the final wording by phone (“Call me for wording here”)."
+            es="El texto de Renovación de recetas y Resultados es un borrador. Diana pidió dar el texto final por teléfono."
+          />
+
+          <h2 id="additional-resources" className="mt-10 scroll-mt-24 text-2xl font-bold text-brand-navy md:text-3xl">
+            {t("Additional Resources", "Recursos adicionales")}
+          </h2>
+          <ul className="mt-4 flex flex-col gap-3">
+            {additionalResources.map((r) => (
+              <li key={r.en} className="flex flex-col gap-1 rounded-lg border border-border bg-card p-4 sm:flex-row sm:items-center sm:justify-between">
+                <span className="flex items-center gap-2 font-semibold text-brand-navy">
+                  <FileText className="h-4 w-4 shrink-0 text-brand-teal" aria-hidden="true" />
+                  {t(r.en, r.es)}
+                </span>
+                <span data-review-placeholder="true" className="text-xs font-semibold text-amber-800">
+                  {t("Pending: ", "Pendiente: ")}
+                  {t(r.pendingEn, r.pendingEs)}
+                </span>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
 
-      {/* Emergency */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-4xl px-4 py-16 md:py-20">
-          <div className="flex flex-col items-center gap-6 rounded-2xl border-2 border-brand-red/20 bg-brand-red/5 p-8 text-center md:p-12">
-            <AlertTriangle className="h-12 w-12 text-brand-red" />
-            <h2 className="text-2xl font-bold text-brand-navy md:text-3xl">
-              {t("In Case of Emergency", "En Caso de Emergencia")}
-            </h2>
-            <p className="max-w-xl leading-relaxed text-muted-foreground">
+          <div className="mt-6 rounded-lg border border-border bg-secondary p-5">
+            <h3 className="font-bold text-brand-navy">{t("Desert Oasis Healthcare (DOHC) contact information", "Información de contacto de Desert Oasis Healthcare (DOHC)")}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               {t(
-                "If you are experiencing a medical emergency, please call 911 immediately or go to your nearest emergency room. For non-emergency after-hours questions, please call our office and leave a message.",
-                "Si esta experimentando una emergencia medica, por favor llame al 911 inmediatamente o vaya a la sala de emergencias mas cercana. Para preguntas fuera de horario que no sean de emergencia, llame a nuestra oficina y deje un mensaje."
+                "These are DOHC phone lines, not Paredes Medical Corporation's office line.",
+                "Estas son líneas telefónicas de DOHC, no la línea de la oficina de Paredes Medical Corporation."
               )}
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
-                <a href="tel:911">
-                  {t("Call 911", "Llamar al 911")}
+            <ul className="mt-3 flex flex-col gap-1 text-sm">
+              <li>
+                {t("DOHC 24/7 Patient Helpline: ", "Línea de ayuda para pacientes de DOHC, 24/7: ")}
+                <a href={DOHC.helplineHref} className="inline-flex min-h-11 items-center font-bold text-brand-navy underline underline-offset-4">
+                  {DOHC.helplineDisplay}
                 </a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-brand-navy text-brand-navy hover:bg-brand-navy/5">
-                <a href={SITE.phoneHref}>
-                  <Phone className="mr-2 h-4 w-4" />
-                  {t("Call Our Office", "Llamar a Nuestra Oficina")}
+              </li>
+              <li>
+                {t("DOHC main line (Call Us First), for DOHC Immediate Care hours or locations: ", "Línea principal de DOHC (Call Us First), para horarios o ubicaciones de atención inmediata de DOHC: ")}
+                <a href={DOHC.mainLineHref} className="inline-flex min-h-11 items-center font-bold text-brand-navy underline underline-offset-4">
+                  {DOHC.mainLineDisplay}
                 </a>
-              </Button>
-            </div>
+              </li>
+            </ul>
+            <a
+              href={DOHC.contactUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-brand-navy underline underline-offset-4 hover:text-brand-teal"
+            >
+              {t("DOHC contact page", "Página de contacto de DOHC")}
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </a>
           </div>
+
+          <h2 className="mt-10 text-2xl font-bold text-brand-navy md:text-3xl">{t("Stay Connected", "Manténgase en contacto")}</h2>
+          <p className="mt-4 leading-relaxed text-muted-foreground">
+            {t(
+              "Follow us on Instagram for office news, health education, and community updates.",
+              "Síganos en Instagram para conocer las novedades de nuestra oficina, información de salud y actividades en la comunidad."
+            )}
+          </p>
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button asChild variant="outline" className="min-h-11 border-brand-navy text-brand-navy hover:bg-brand-navy/5">
+              <a href={SITE.instagram} target="_blank" rel="noopener noreferrer">
+                <Instagram className="mr-2 h-4 w-4" aria-hidden="true" />
+                {SITE.instagramHandle}
+              </a>
+            </Button>
+          </div>
+          <ReviewPlaceholder
+            className="mt-4"
+            en="Facebook: Diana's draft mentions Facebook, but no verified page URL has been supplied."
+            es="Facebook: el borrador de Diana menciona Facebook, pero no se ha recibido una dirección verificada."
+          />
+          <p className="mt-4 leading-relaxed text-muted-foreground">
+            {t(
+              "For appointments, medication requests, or questions about your care, please call our office. Social media messages are not a channel for medical care.",
+              "Para citas, solicitudes de medicamentos o preguntas sobre su atención, llame a nuestra oficina. Los mensajes en redes sociales no son un medio para recibir atención médica."
+            )}
+          </p>
         </div>
       </section>
 
-      {/* CTA */}
       <section className="bg-brand-teal">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-4 py-14 text-center text-accent-foreground">
-          <h2 className="text-3xl font-bold">
-            {t("Questions? We Are Here to Help", "Preguntas? Estamos Aqui Para Ayudar")}
-          </h2>
-          <p className="max-w-xl text-accent-foreground/80">
-            {t(
-              "Our team is available Monday through Friday to assist you with any questions or concerns.",
-              "Nuestro equipo esta disponible de lunes a viernes para asistirle con cualquier pregunta o inquietud."
-            )}
-          </p>
-          <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
+          <Button asChild size="lg" className="min-h-12 bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
             <a href={SITE.phoneHref}>
-              <Phone className="mr-2 h-5 w-5" />
-              (760) 972-4704
+              <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
+              {t("Call", "Llame al")} {SITE.phoneDisplay}
             </a>
           </Button>
+          <p className="text-sm text-accent-foreground/90">
+            {t("If you are experiencing a medical emergency, call 911.", "Si tiene una emergencia médica, llame al 911.")}
+          </p>
         </div>
       </section>
     </div>

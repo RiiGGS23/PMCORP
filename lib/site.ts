@@ -16,3 +16,16 @@ export const SITE = {
   instagramHandle: "@paredesmedical",
   yelp: "https://yelp.to/k2DVUqmYws",
 } as const
+
+// Desert Oasis Healthcare (DOHC) lines. These are DOHC's numbers, NOT Paredes Medical
+// Corporation's office line, and the clinic itself is not open 24/7.
+// Source (supplied by Diana via Overseer, Nov 8 2026): https://www.mydohc.com/contact/
+// plus DOHC screenshots of the "24/7 Patient Helpline" and "Main Line: Call Us First" cards.
+export const DOHC = {
+  name: "Desert Oasis Healthcare (DOHC)",
+  contactUrl: "https://www.mydohc.com/contact/",
+  helplineDisplay: "760-969-6555",
+  helplineHref: "tel:+17609696555",
+  mainLineDisplay: "760-325-DOHC (3642)",
+  mainLineHref: "tel:+17603253642",
+} as const

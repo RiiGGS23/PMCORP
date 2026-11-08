@@ -22,6 +22,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  // Keep <html lang> in sync with the toggle so screen readers use the right language.
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
+
   const setLang = (newLang: Language) => {
     setLangState(newLang)
     localStorage.setItem("pmcorp-lang", newLang)
