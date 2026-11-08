@@ -68,7 +68,8 @@ function PostEmbed({
     }
     onStatus(post.shortcode, "loading")
 
-    // Same markup Instagram's embed code / oEmbed returns for a single post.
+    // Same markup Instagram's oEmbed returns for a single post (hidecaption: no
+    // data-instgrm-captioned attribute, so the caption is not shown automatically).
     const bq = document.createElement("blockquote")
     bq.className = "instagram-media"
     bq.setAttribute("data-instgrm-permalink", `${post.permalink}?utm_source=ig_embed&utm_campaign=loading`)
@@ -136,7 +137,15 @@ export function InstagramCurated() {
           <p className="text-muted-foreground">{INSTAGRAM_HANDLE}</p>
           {posts.length > 0 && (
             <p className="text-sm text-muted-foreground">
-              {t("Selected Instagram posts. Updated manually.", "Publicaciones seleccionadas de Instagram. Se actualiza manualmente.")}
+              {posts.length === 1
+                ? t(
+                    "A selected past Instagram post. Updated manually; this is not a live feed.",
+                    "Una publicación anterior seleccionada de Instagram. Se actualiza manualmente; no es una sección en vivo."
+                  )
+                : t(
+                    "Selected past Instagram posts. Updated manually; this is not a live feed.",
+                    "Publicaciones anteriores seleccionadas de Instagram. Se actualiza manualmente; no es una sección en vivo."
+                  )}
             </p>
           )}
         </div>
@@ -168,11 +177,17 @@ export function InstagramCurated() {
                 </div>
               )}
             </div>
-            <ul className="grid justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <ul
+              className={
+                posts.length === 1
+                  ? "flex justify-center"
+                  : "grid justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3"
+              }
+            >
               {posts.map((post) => {
                 const status = statusOf(post)
                 return (
-                  <li key={post.shortcode} className="w-full max-w-[400px]">
+                  <li key={post.shortcode} className={posts.length === 1 ? "w-full max-w-[540px]" : "w-full max-w-[400px]"}>
                     {/* Kept mounted so a slow embed can still finish; hidden if it failed. */}
                     <div hidden={status === "failed"}>
                       <PostEmbed post={post} onStatus={onStatus} />

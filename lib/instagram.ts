@@ -47,8 +47,20 @@ export const BLOCKED_INSTAGRAM_SHORTCODES: readonly string[] = [
   "DLP84MOud1O",
 ]
 
-// EMPTY until vetted, already-published post URLs are supplied. Do not fill with guesses.
-export const CURATED_INSTAGRAM_POSTS: readonly CuratedInstagramPost[] = []
+// Manually curated, already-published posts that passed website content review.
+// Add only vetted URLs; never guesses. Not excluded here but NOT added (pending verification of
+// fax / DOHC footer numbers / credential claims): Doctor bio graphics DHKfxa1x47i (EN), DHKgBA4xwt_ (ES).
+export const CURATED_INSTAGRAM_POSTS: readonly CuratedInstagramPost[] = [
+  {
+    // Static tulip "Happy Mother's Day" graphic: no people, procedures, clinical claims,
+    // contact details or credentials. Caption is a general EN/ES greeting. Seasonal past post.
+    url: "https://www.instagram.com/p/DYLb0rrCbwa/",
+    reviewedBy: "Website content review (Grok Bot)",
+    reviewedOn: "2026-11-08",
+    labelEn: "Mother’s Day greeting",
+    labelEs: "Saludo del Día de las Madres",
+  },
+]
 
 // Accepts /p/{code}/, /reel/{code}/ and the profile-scoped /{username}/p/{code}/ form;
 // always normalized to the canonical /p|reel/{code}/ permalink documented for embeds.
