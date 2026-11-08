@@ -18,6 +18,7 @@ import { useLanguage } from "@/lib/language-context"
 import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import { DohcAssistance } from "@/components/dohc-assistance"
+import { InstagramCurated } from "@/components/instagram-curated"
 
 export default function HomePage() {
   const { t } = useLanguage()
@@ -343,54 +344,8 @@ export default function HomePage() {
       {/* Testimonials: intentionally removed. The previous quotes were invented.
           TODO(clinic): add real, consented patient reviews here (e.g., from Yelp) before publishing. */}
 
-      {/* Instagram Feed Teaser */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="mb-10 flex flex-col items-center gap-3 text-center">
-            <Instagram className="h-8 w-8 text-brand-red" />
-            <h2 className="text-3xl font-bold text-brand-navy">
-              {t("Follow Us on Instagram", "Síguenos en Instagram")}
-            </h2>
-            <p className="text-muted-foreground">
-              @paredesmedical
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {[1, 2, 3, 4].map((i) => (
-              <a
-                key={i}
-                href={SITE.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative aspect-square overflow-hidden rounded-xl bg-secondary"
-              >
-                <div className="flex h-full items-center justify-center text-muted-foreground transition-colors group-hover:text-brand-red">
-                  <Instagram className="h-10 w-10" />
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center bg-brand-navy/70 opacity-0 transition-opacity group-hover:opacity-100">
-                  <span className="text-sm font-semibold text-brand-warm-white">{t("View on Instagram", "Ver en Instagram")}</span>
-                </div>
-              </a>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <Button
-              asChild
-              variant="outline"
-              className="border-brand-red text-brand-red hover:bg-brand-red/5"
-            >
-              <a
-                href={SITE.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="mr-2 h-4 w-4" />
-                {t("Follow @paredesmedical", "Seguir @paredesmedical")}
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Instagram: office-approved posts only, official embed, curated (not an auto feed) */}
+      <InstagramCurated />
 
       {/* Map + Info */}
       <section className="bg-secondary">
