@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { Instagram, ExternalLink, Loader2, AlertCircle } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { Button } from "@/components/ui/button"
@@ -9,6 +9,7 @@ import {
   INSTAGRAM_HANDLE,
   INSTAGRAM_PROFILE_URL,
   getDisplayableInstagramPosts,
+  type DisplayableInstagramPost,
 } from "@/lib/instagram"
 
 declare global {
@@ -17,63 +18,112 @@ declare global {
   }
 }
 
+// Official Instagram embed library (https://developers.facebook.com/docs/instagram-platform/oembed/:
+// "To manually initialize the embed HTML, call the instgrm.Embeds.process() function after
+// loading the library").
 const EMBED_SCRIPT_SRC = "https://www.instagram.com/embed.js"
 const EMBED_TIMEOUT_MS = 10000
 
-type Status = "loading" | "ready" | "error"
+type PostStatus = "loading" | "embedded" | "failed"
 
+let scriptPromise: Promise<void> | null = null
 function loadEmbedScript(): Promise<void> {
   if (window.instgrm) return Promise.resolve()
-  const existing = document.querySelector<HTMLScriptElement>(`script[src="${EMBED_SCRIPT_SRC}"]`)
-  return new Promise((resolve, reject) => {
-    const script = existing ?? document.createElement("script")
-    script.addEventListener("load", () => resolve(), { once: true })
-    script.addEventListener("error", () => reject(new Error("instagram embed.js failed")), { once: true })
-    if (!existing) {
-      script.src = EMBED_SCRIPT_SRC
-      script.async = true
-      document.body.appendChild(script)
+  if (scriptPromise) return scriptPromise
+  scriptPromise = new Promise<void>((resolve, reject) => {
+    const script = document.createElement("script")
+    script.src = EMBED_SCRIPT_SRC
+    script.async = true
+    script.onload = () => resolve()
+    script.onerror = () => {
+      scriptPromise = null // allow a later retry
+      script.remove()
+      reject(new Error("instagram embed.js failed to load"))
     }
+    document.body.appendChild(script)
   })
+  return scriptPromise
 }
 
-// Homepage Instagram section: shows ONLY office-approved posts via Instagram's official embed.
-// Curated and updated manually (see lib/instagram.ts); it is not an automatic feed.
+// One embed. The embed DOM is created imperatively inside an empty container that React
+// never renders children into, because embed.js replaces the <blockquote> with an <iframe>.
+// This keeps React reconciliation (e.g. EN/ES toggle re-renders) from touching it.
+function PostEmbed({
+  post,
+  onStatus,
+}: {
+  post: DisplayableInstagramPost
+  onStatus: (shortcode: string, status: PostStatus) => void
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const host = ref.current
+    if (!host) return
+    let done = false
+    const finish = (status: PostStatus) => {
+      if (done) return
+      done = true
+      onStatus(post.shortcode, status)
+    }
+    onStatus(post.shortcode, "loading")
+
+    // Same markup Instagram's embed code / oEmbed returns for a single post.
+    const bq = document.createElement("blockquote")
+    bq.className = "instagram-media"
+    bq.setAttribute("data-instgrm-permalink", `${post.permalink}?utm_source=ig_embed&utm_campaign=loading`)
+    bq.setAttribute("data-instgrm-version", "14")
+    bq.style.cssText = "margin:0;min-width:0;width:100%;max-width:540px;background:#fff;border:0;"
+    const a = document.createElement("a")
+    a.href = post.permalink
+    a.target = "_blank"
+    a.rel = "noopener noreferrer"
+    a.textContent = "Instagram"
+    bq.appendChild(a)
+    host.replaceChildren(bq)
+
+    // "embedded" = embed.js created this post's iframe. Cross-origin content inside the
+    // iframe (e.g. a deleted post) cannot be inspected, so this is not a content check.
+    const observer = new MutationObserver(() => {
+      if (host.querySelector("iframe")) finish("embedded")
+    })
+    observer.observe(host, { childList: true, subtree: true })
+    const timer = window.setTimeout(() => {
+      if (!host.querySelector("iframe")) finish("failed")
+    }, EMBED_TIMEOUT_MS)
+
+    loadEmbedScript()
+      .then(() => {
+        if (!done) window.instgrm?.Embeds.process()
+      })
+      .catch(() => finish("failed"))
+
+    return () => {
+      done = true
+      observer.disconnect()
+      window.clearTimeout(timer)
+      host.replaceChildren()
+    }
+    // Re-create only when the post itself changes (not on language changes).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [post.permalink])
+
+  return <div ref={ref} className="w-full" />
+}
+
+// Homepage Instagram section: shows ONLY posts in the curated list (lib/instagram.ts), via
+// Instagram's official single-post embed. Updated manually; it is not an automatic feed.
 export function InstagramCurated() {
   const { t } = useLanguage()
   const posts = getDisplayableInstagramPosts()
-  const [status, setStatus] = useState<Status>("loading")
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [statuses, setStatuses] = useState<Record<string, PostStatus>>({})
+  const onStatus = useCallback((shortcode: string, status: PostStatus) => {
+    setStatuses((prev) => (prev[shortcode] === status ? prev : { ...prev, [shortcode]: status }))
+  }, [])
 
-  useEffect(() => {
-    if (posts.length === 0) return
-    let cancelled = false
-    setStatus("loading")
-    const timer = window.setTimeout(() => {
-      if (!cancelled && !containerRef.current?.querySelector("iframe")) setStatus("error")
-    }, EMBED_TIMEOUT_MS)
-    const observer = new MutationObserver(() => {
-      if (containerRef.current?.querySelector("iframe")) {
-        setStatus("ready")
-        observer.disconnect()
-      }
-    })
-    if (containerRef.current) observer.observe(containerRef.current, { childList: true, subtree: true })
-    loadEmbedScript()
-      .then(() => {
-        if (!cancelled) window.instgrm?.Embeds.process()
-      })
-      .catch(() => {
-        if (!cancelled) setStatus("error")
-      })
-    return () => {
-      cancelled = true
-      window.clearTimeout(timer)
-      observer.disconnect()
-    }
-    // posts come from a static list; re-run only when its contents change
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [posts.map((p) => p.shortcode).join(",")])
+  const statusOf = (p: DisplayableInstagramPost): PostStatus => statuses[p.shortcode] ?? "loading"
+  const loadingCount = posts.filter((p) => statusOf(p) === "loading").length
+  const failedCount = posts.filter((p) => statusOf(p) === "failed").length
 
   return (
     <section className="bg-background" aria-labelledby="instagram-heading">
@@ -85,11 +135,8 @@ export function InstagramCurated() {
           </h2>
           <p className="text-muted-foreground">{INSTAGRAM_HANDLE}</p>
           {posts.length > 0 && (
-            <p className="max-w-xl text-sm text-muted-foreground">
-              {t(
-                "Selected posts chosen by our office. This section is updated manually and does not show every post.",
-                "Publicaciones seleccionadas por nuestra oficina. Esta sección se actualiza manualmente y no muestra todas las publicaciones."
-              )}
+            <p className="text-sm text-muted-foreground">
+              {t("Selected Instagram posts. Updated manually.", "Publicaciones seleccionadas de Instagram. Se actualiza manualmente.")}
             </p>
           )}
         </div>
@@ -97,58 +144,66 @@ export function InstagramCurated() {
         {posts.length === 0 ? (
           <ReviewPlaceholder
             className="mx-auto max-w-3xl"
-            en="No Instagram posts have been approved for the website yet. Approved post links from the office are needed before this section can show posts."
-            es="Aún no se han aprobado publicaciones de Instagram para el sitio web. Se necesitan los enlaces de publicaciones aprobadas por la oficina para mostrar publicaciones aquí."
+            en="No Instagram posts have been added to this section yet. It needs links to already-published posts that have passed website content review."
+            es="Aún no se han agregado publicaciones de Instagram a esta sección. Se necesitan enlaces de publicaciones ya publicadas que hayan pasado la revisión de contenido del sitio web."
           />
         ) : (
           <>
-            {status === "loading" && (
-              <p role="status" className="mb-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-                {t("Loading Instagram posts…", "Cargando publicaciones de Instagram…")}
-              </p>
-            )}
-            {status === "error" && (
-              <div role="status" className="mx-auto mb-6 flex max-w-2xl items-start gap-3 rounded-lg border border-border bg-secondary p-4 text-sm text-muted-foreground">
-                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" aria-hidden="true" />
-                <p>
-                  {t(
-                    "Instagram posts could not be loaded here (they may be blocked by your browser). You can still open each post on Instagram:",
-                    "No se pudieron cargar las publicaciones de Instagram aquí (es posible que su navegador las bloquee). Puede abrir cada publicación en Instagram:"
-                  )}
+            <div aria-live="polite">
+              {loadingCount > 0 && (
+                <p className="mb-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  {t("Loading Instagram posts…", "Cargando publicaciones de Instagram…")}
                 </p>
-              </div>
-            )}
-            <div ref={containerRef} className="grid justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post) =>
-                status === "error" ? (
-                  <a
-                    key={post.shortcode}
-                    href={post.permalink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex min-h-14 w-full max-w-sm items-center justify-between gap-3 rounded-xl border border-border bg-card px-5 py-4 font-semibold text-brand-navy shadow-sm hover:border-brand-teal"
-                  >
-                    {t(post.labelEn, post.labelEs)}
-                    <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  </a>
-                ) : (
-                  <div key={post.shortcode} className="w-full max-w-[400px]">
-                    {/* Official Instagram embed markup; embed.js turns it into an iframe. */}
-                    <blockquote
-                      className="instagram-media"
-                      data-instgrm-permalink={`${post.permalink}?utm_source=ig_embed`}
-                      data-instgrm-version="14"
-                      style={{ margin: 0, minWidth: 0, width: "100%", maxWidth: 540, background: "#fff", border: 0 }}
-                    >
-                      <a href={post.permalink} target="_blank" rel="noopener noreferrer">
-                        {t(post.labelEn, post.labelEs)}
-                      </a>
-                    </blockquote>
-                  </div>
-                )
+              )}
+              {failedCount > 0 && (
+                <div className="mx-auto mb-6 flex max-w-2xl items-start gap-3 rounded-lg border border-border bg-secondary p-4 text-sm text-muted-foreground">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" aria-hidden="true" />
+                  <p>
+                    {t(
+                      "Some Instagram posts could not be loaded here (your browser may block them). You can open them on Instagram instead.",
+                      "Algunas publicaciones de Instagram no se pudieron cargar aquí (es posible que su navegador las bloquee). Puede abrirlas en Instagram."
+                    )}
+                  </p>
+                </div>
               )}
             </div>
+            <ul className="grid justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {posts.map((post) => {
+                const status = statusOf(post)
+                return (
+                  <li key={post.shortcode} className="w-full max-w-[400px]">
+                    {/* Kept mounted so a slow embed can still finish; hidden if it failed. */}
+                    <div hidden={status === "failed"}>
+                      <PostEmbed post={post} onStatus={onStatus} />
+                    </div>
+                    {status === "failed" && (
+                      <a
+                        href={post.permalink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex min-h-14 w-full items-center justify-between gap-3 rounded-xl border border-border bg-card px-5 py-4 font-semibold text-brand-navy shadow-sm hover:border-brand-teal"
+                      >
+                        {t(post.labelEn, post.labelEs)}
+                        <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      </a>
+                    )}
+                    {status !== "failed" && (
+                      <a
+                        href={post.permalink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-brand-navy underline underline-offset-4 hover:text-brand-teal"
+                      >
+                        {t(post.labelEn, post.labelEs)}
+                        <span className="sr-only">{t(" (opens Instagram)", " (abre Instagram)")}</span>
+                        <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                      </a>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
           </>
         )}
 
