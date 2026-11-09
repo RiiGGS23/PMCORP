@@ -58,9 +58,27 @@ export default function HomePage() {
 
           {/* Text */}
           <div className="order-2 flex flex-col items-center gap-4 px-5 py-8 text-center sm:py-10 lg:order-1 lg:items-start lg:justify-center lg:px-10 lg:py-16 lg:text-left">
-            <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-brand-warm-white sm:text-5xl lg:text-6xl">
-              Paredes Medical Corporation
-            </h1>
+            {/* Heading with the BusinessRate badge as a "sticker" beside it (Gustavo, Nov 9).
+                Sizes chosen so the heading never collides with the badge at 390px or at lg. */}
+            <div className="flex items-center justify-center gap-3 sm:gap-4 lg:justify-start">
+              <h1 className="min-w-0 text-balance text-[2rem] font-bold leading-tight tracking-tight text-brand-warm-white sm:text-5xl xl:text-6xl">
+                Paredes Medical Corporation
+              </h1>
+              <a
+                href="#award"
+                className="shrink-0 rotate-6 rounded-md transition-transform hover:rotate-3 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-teal motion-reduce:transition-none"
+              >
+                <img
+                  src="/images/businessrate-badge-260.webp"
+                  srcSet="/images/businessrate-badge-160.webp 160w, /images/businessrate-badge-260.webp 260w"
+                  sizes="(min-width: 1280px) 128px, (min-width: 1024px) 110px, (min-width: 640px) 96px, 76px"
+                  alt={t("BusinessRate Best of 2026 Award Winner", "Ganador del premio Best of 2026 de BusinessRate")}
+                  width={260}
+                  height={231}
+                  className="h-auto w-[76px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.45)] sm:w-24 lg:w-[110px] xl:w-32"
+                />
+              </a>
+            </div>
             <p className="font-script text-3xl leading-snug text-brand-teal sm:text-4xl lg:text-5xl">
               {t("Care and Compassion You Deserve", "El Cuidado y la Compasión Que Usted Merece")}
             </p>
@@ -87,19 +105,6 @@ export default function HomePage() {
                 )}
               </p>
             </div>
-            <a
-              href="#award"
-              className="inline-flex min-h-11 items-center gap-3 rounded-full border border-brand-warm-white/25 bg-brand-warm-white/5 py-1 pl-1 pr-4 text-sm font-semibold text-brand-warm-white transition-colors hover:bg-brand-warm-white/10"
-            >
-              <img
-                src="/images/businessrate-best-of-2026-320.webp"
-                alt=""
-                width={28}
-                height={35}
-                className="h-9 w-auto rounded"
-              />
-              {t("Best of 2026 Award Winner · BusinessRate", "Premio: Best of 2026 Award Winner · BusinessRate")}
-            </a>
           </div>
         </div>
       </section>
