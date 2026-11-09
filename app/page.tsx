@@ -7,18 +7,18 @@ import {
   Heart,
   Stethoscope,
   ShieldCheck,
-  Users,
-  Activity,
   ClipboardList,
   ArrowRight,
   MapPin,
   Clock,
   Instagram,
+  CheckCircle2,
 } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { DohcAssistance } from "@/components/dohc-assistance"
+import { InstagramCurated } from "@/components/instagram-curated"
 
 export default function HomePage() {
   const { t } = useLanguage()
@@ -41,7 +41,7 @@ export default function HomePage() {
                 src="/images/dr-paredes-hero-800.webp"
                 alt={t(
                   "Dr. Gustavo Paredes, MD, family medicine physician at Paredes Medical Corporation in Coachella, California",
-                  "Dr. Gustavo Paredes, MD, medico de medicina familiar en Paredes Medical Corporation en Coachella, California"
+                  "Dr. Gustavo Paredes, MD, médico de medicina familiar en Paredes Medical Corporation en Coachella, California"
                 )}
                 width={1600}
                 height={1067}
@@ -58,11 +58,29 @@ export default function HomePage() {
 
           {/* Text */}
           <div className="order-2 flex flex-col items-center gap-4 px-5 py-8 text-center sm:py-10 lg:order-1 lg:items-start lg:justify-center lg:px-10 lg:py-16 lg:text-left">
-            <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-brand-warm-white sm:text-5xl lg:text-6xl">
-              Paredes Medical Corporation
-            </h1>
+            {/* Heading with the BusinessRate badge as a "sticker" beside it (Gustavo, Nov 9).
+                Sizes chosen so the heading never collides with the badge at 390px or at lg. */}
+            <div className="flex items-center justify-center gap-3 sm:gap-4 lg:justify-start">
+              <h1 className="min-w-0 text-balance text-[2rem] font-bold leading-tight tracking-tight text-brand-warm-white sm:text-5xl xl:text-6xl">
+                Paredes Medical Corporation
+              </h1>
+              <a
+                href="#award"
+                className="shrink-0 rotate-6 rounded-md transition-transform hover:rotate-3 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-teal motion-reduce:transition-none"
+              >
+                <img
+                  src="/images/businessrate-badge-260.webp"
+                  srcSet="/images/businessrate-badge-160.webp 160w, /images/businessrate-badge-260.webp 260w"
+                  sizes="(min-width: 1280px) 128px, (min-width: 1024px) 110px, (min-width: 640px) 96px, 76px"
+                  alt={t("BusinessRate Best of 2026 Award Winner", "Ganador del premio Best of 2026 de BusinessRate")}
+                  width={260}
+                  height={231}
+                  className="h-auto w-[76px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.45)] sm:w-24 lg:w-[110px] xl:w-32"
+                />
+              </a>
+            </div>
             <p className="font-script text-3xl leading-snug text-brand-teal sm:text-4xl lg:text-5xl">
-              {t("Care and Compassion You Deserve", "El Cuidado y la Compasion Que Usted Merece")}
+              {t("Care and Compassion You Deserve", "El Cuidado y la Compasión Que Usted Merece")}
             </p>
             <a
               id="hero-call"
@@ -87,33 +105,20 @@ export default function HomePage() {
                 )}
               </p>
             </div>
-            <a
-              href="#award"
-              className="inline-flex min-h-11 items-center gap-3 rounded-full border border-brand-warm-white/25 bg-brand-warm-white/5 py-1 pl-1 pr-4 text-sm font-semibold text-brand-warm-white transition-colors hover:bg-brand-warm-white/10"
-            >
-              <img
-                src="/images/businessrate-best-of-2026-320.webp"
-                alt=""
-                width={28}
-                height={35}
-                className="h-9 w-auto rounded"
-              />
-              {t("Best of 2026 Award Winner · BusinessRate", "Premio: Best of 2026 Award Winner · BusinessRate")}
-            </a>
           </div>
         </div>
       </section>
 
       {/* Quick links */}
-      <nav aria-label={t("Quick links", "Enlaces rapidos")} className="border-b border-border bg-card">
+      <nav aria-label={t("Quick links", "Enlaces rápidos")} className="border-b border-border bg-card">
         <ul className="mx-auto grid max-w-7xl grid-cols-2 gap-3 px-4 py-5 sm:grid-cols-3 lg:grid-cols-6">
           {[
-            { icon: Phone, en: "Call Us", es: "Llamenos", href: SITE.phoneHref, external: false },
+            { icon: Phone, en: "Call Us", es: "Llámenos", href: SITE.phoneHref, external: false },
             { icon: Stethoscope, en: "Meet Our Doctor", es: "Nuestro Doctor", href: "/doctor", external: false },
-            { icon: Users, en: "Our Staff", es: "Nuestro Equipo", href: "/staff", external: false },
+            { icon: ClipboardList, en: "Why Have a PCP?", es: "¿Por qué un PCP?", href: "/why-have-a-pcp", external: false },
             { icon: Heart, en: "Services", es: "Servicios", href: "/services", external: false },
             { icon: ShieldCheck, en: "Insurances", es: "Seguros", href: "/insurances", external: false },
-            { icon: MapPin, en: "Directions", es: "Como Llegar", href: SITE.directionsHref, external: true },
+            { icon: MapPin, en: "Directions", es: "Cómo llegar", href: SITE.directionsHref, external: true },
           ].map((q) => (
             <li key={q.en}>
               <a
@@ -133,9 +138,9 @@ export default function HomePage() {
       <section className="bg-brand-teal">
         <div className="mx-auto flex max-w-4xl flex-col items-center justify-around gap-6 px-4 py-8 text-center text-accent-foreground sm:flex-row sm:gap-4">
           {[
-            { icon: ShieldCheck, en: "30+ Years Experience", es: "30+ Anos de Experiencia" },
+            { icon: ShieldCheck, en: "30+ Years Experience", es: "30+ Años de Experiencia" },
             { icon: Stethoscope, en: "Board-Certified", es: "Certificado por la Junta" },
-            { icon: Heart, en: "Family-Centered Care", es: "Atencion Centrada en la Familia" },
+            { icon: Heart, en: "Family-Centered Care", es: "Atención Centrada en la Familia" },
           ].map((stat, i) => (
             <div key={i} className="flex items-center gap-3">
               <stat.icon className="h-7 w-7 shrink-0" />
@@ -145,17 +150,54 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* About Snippet */}
+      {/* Care for Today: homepage short blurb from Diana's draft (webpage1 pp. 1-2) */}
       <section className="bg-background">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-16 md:flex-row md:py-20">
-          <div className="flex flex-1 gap-4">
+        <div className="mx-auto max-w-5xl px-4 py-14 md:py-20">
+          <h2 className="text-balance text-3xl font-bold text-brand-navy md:text-4xl">
+            {t("Care for Today. Support for the Years Ahead.", "Cuidamos su salud hoy y le acompañamos con el paso de los años")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            {t("We help patients care for their health through:", "Le ayudamos a cuidar su salud mediante:")}
+          </p>
+          <ul className="mt-4 flex flex-col gap-3">
+            {[
+              { en: "Routine visits and preventive care.", es: "Consultas de rutina y atención preventiva." },
+              {
+                en: "Chronic disease management, such as diabetes, high blood pressure, and other ongoing conditions.",
+                es: "Control de enfermedades crónicas, como la diabetes, la presión arterial alta y otras afecciones continuas.",
+              },
+              { en: "Care for common illnesses and health concerns.", es: "Atención de enfermedades comunes y otras inquietudes de salud." },
+              { en: "Personalized care for older adults.", es: "Atención personalizada para adultos mayores." },
+              {
+                en: "Coordination with specialists and other healthcare professionals.",
+                es: "Coordinación con especialistas y otros profesionales de la salud.",
+              },
+            ].map((item) => (
+              <li key={item.en} className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" aria-hidden="true" />
+                <span className="text-foreground">{t(item.en, item.es)}</span>
+              </li>
+            ))}
+          </ul>
+          <Button asChild size="lg" className="mt-8 min-h-12 w-full bg-brand-navy text-primary-foreground hover:bg-brand-navy/90 sm:w-auto">
+            <Link href="/services">
+              {t("Explore Our Services", "Conozca nuestros servicios")}
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* Meet Dr. Paredes: short blurb. Homepage doctor CTA button intentionally NOT shown
+          (Gustavo's explicit Nov 6 removal; Diana's highlighted "Get to Know Dr. Paredes"
+          is an open conflict awaiting his decision). */}
+      <section className="bg-secondary">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-4 py-14 md:flex-row md:py-20">
+          <div className="flex w-full flex-1 gap-4">
             <div className="relative aspect-[3/4] w-1/2 overflow-hidden rounded-xl shadow-lg">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Doctor%20with%20elderly%20female.png-mcdYejRgHD8meVgnbGPNCkvW6GOlzm.jpeg"
-                alt={t(
-                  "Dr. Paredes examining a patient",
-                  "Dr. Paredes examinando a una paciente"
-                )}
+                alt={t("Dr. Paredes examining a patient", "El Dr. Paredes examinando a una paciente")}
                 fill
                 className="object-cover"
               />
@@ -163,91 +205,100 @@ export default function HomePage() {
             <div className="relative mt-8 aspect-[3/4] w-1/2 overflow-hidden rounded-xl shadow-lg">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Doctor%20with%20elderly%20male.png-yIKvdhQAleua8etVQDeqtgaE6tUqQy.jpeg"
-                alt={t(
-                  "Dr. Paredes with a patient",
-                  "Dr. Paredes con un paciente"
-                )}
+                alt={t("Dr. Paredes with a patient", "El Dr. Paredes con un paciente")}
                 fill
                 className="object-cover"
               />
             </div>
           </div>
-          <div className="flex flex-1 flex-col gap-5">
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-teal">
-              {t("About Our Practice", "Sobre Nuestra Practica")}
-            </p>
-            <h2 className="text-balance text-3xl font-bold text-brand-navy md:text-4xl">
-              {t(
-                "Your Family's Health Is Our Mission",
-                "La Salud de Su Familia Es Nuestra Mision"
-              )}
+          <div className="flex flex-1 flex-col gap-4">
+            <h2 className="text-3xl font-bold text-brand-navy md:text-4xl">
+              {t("Meet Dr. Paredes", "Conozca al Dr. Paredes")}
             </h2>
             <p className="leading-relaxed text-muted-foreground">
               {t(
-                "Welcome to Paredes Medical Corporation, the medical office of Dr. Gustavo Paredes, where we believe that every patient deserves exceptional healthcare. Our mission is to provide comprehensive medical services with the genuine care and compassion every patient deserves, as though they were members of our own family.",
-                "Bienvenido a Paredes Medical Corporation, el consultorio medico del Dr. Gustavo Paredes, donde creemos que cada paciente merece una atencion medica excepcional. Nuestra mision es brindar servicios medicos integrales con el cuidado y la compasion genuinos que cada paciente merece, como si fueran miembros de nuestra propia familia."
+                "Gustavo Paredes, M.D., is a family medicine physician with additional fellowship training in geriatrics. He values getting to know his patients, helping them understand their health, and caring for them with the kindness and respect he would want for his own family.",
+                "El Dr. Gustavo Paredes es médico de medicina familiar con formación adicional en geriatría, el cuidado de la salud de los adultos mayores. Para él, es fundamental conocer a sus pacientes, ayudarles a comprender su salud y brindarles la amabilidad y el respeto que desearía para su propia familia."
               )}
             </p>
-            <p className="leading-relaxed text-muted-foreground">
-              {t(
-                "Dr. Paredes has over 30 years of experience in the medical field and is a board-certified Family Medicine physician.",
-                "El Dr. Paredes tiene mas de 30 anos de experiencia en el campo de la medicina y es medico certificado en Medicina Familiar."
-              )}
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="bg-brand-navy text-primary-foreground hover:bg-brand-navy/90">
-                <Link href="/about">
-                  {t("More About Us", "Mas Sobre Nosotros")}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section className="bg-secondary">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="mb-12 text-center">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-brand-teal">
-              {t("What We Offer", "Lo Que Ofrecemos")}
-            </p>
-            <h2 className="text-3xl font-bold text-brand-navy md:text-4xl">
-              {t("Our Services", "Nuestros Servicios")}
-            </h2>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Short blurbs linking to the full pages */}
+      <section className="bg-background">
+        <div className="mx-auto max-w-7xl px-4 py-14 md:py-20">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: Activity, en: "Routine Visits & Preventive Care", es: "Consultas de Rutina y Atencion Preventiva" },
-              { icon: Stethoscope, en: "Specialized Treatments", es: "Tratamientos Especializados" },
-              { icon: Heart, en: "Chronic Disease Management", es: "Manejo de Enfermedades Cronicas" },
-              { icon: ClipboardList, en: "Diabetes & High Blood Pressure", es: "Diabetes y Presion Arterial Alta" },
-              { icon: Activity, en: "Asthma & Weight Management", es: "Asma y Control de Peso" },
-              { icon: ShieldCheck, en: "Kidney Issues & Cholesterol Problems", es: "Problemas de los Rinones y del Colesterol" },
-            ].map((service, i) => (
-              <Card key={i} className="border-0 bg-card shadow-sm transition-shadow hover:shadow-md">
-                <CardContent className="flex items-start gap-4 p-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-teal/10">
-                    <service.icon className="h-6 w-6 text-brand-teal" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-brand-navy">{t(service.en, service.es)}</h3>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Button asChild className="bg-brand-navy text-primary-foreground hover:bg-brand-navy/90">
-              <Link href="/services">
-                {t("View All Services", "Ver Todos los Servicios")}
-                <ArrowRight className="ml-2 h-4 w-4" />
+              {
+                href: "/about",
+                titleEn: "About Us",
+                titleEs: "Conózcanos",
+                en: "At Paredes Medical Corporation, we want you to feel heard, respected, and comfortable asking questions.",
+                es: "En Paredes Medical Corporation, queremos que usted se sienta escuchado, respetado y con la confianza de hacer preguntas.",
+              },
+              {
+                href: "/why-have-a-pcp",
+                titleEn: "Why Have a PCP?",
+                titleEs: "¿Por qué tener un médico de cabecera?",
+                en: "Having a primary care physician, or PCP, gives you a consistent place to turn for routine care, new concerns, and support with ongoing health conditions.",
+                es: "Contar con un médico de atención primaria, también llamado PCP o médico de cabecera, le brinda un lugar de confianza al cual acudir para sus consultas de rutina, nuevas inquietudes y el control de enfermedades crónicas.",
+              },
+              {
+                href: "/resources",
+                titleEn: "Patient Resources",
+                titleEs: "Recursos para pacientes",
+                en: "We want you to feel informed and ready for your visit.",
+                es: "Queremos que usted se sienta informado y preparado para su consulta.",
+              },
+              {
+                href: "/contact",
+                titleEn: "Contact & Location",
+                titleEs: "Contacto y ubicación",
+                en: "For appointments and questions about our office, please call.",
+                es: "Para programar una cita o hacer preguntas sobre nuestra oficina, llámenos.",
+              },
+            ].map((card) => (
+              <Link
+                key={card.href}
+                href={card.href}
+                className="group flex flex-col gap-3 rounded-xl border border-border bg-card p-6 shadow-sm transition-colors hover:border-brand-teal"
+              >
+                <h3 className="text-lg font-bold text-brand-navy">{t(card.titleEn, card.titleEs)}</h3>
+                <p className="flex-1 text-sm leading-relaxed text-muted-foreground">{t(card.en, card.es)}</p>
+                <span className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-brand-red">
+                  {t(card.titleEn, card.titleEs)}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                </span>
               </Link>
-            </Button>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Insurance blurb */}
+      <section className="bg-brand-navy">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-4 px-4 py-14 text-center">
+          <h2 className="text-balance text-3xl font-bold text-brand-warm-white">
+            {t("Have Questions About Your Insurance?", "¿Tiene preguntas sobre su seguro médico?")}
+          </h2>
+          <p className="max-w-2xl text-brand-warm-white/80">
+            {t(
+              "Call our office for help checking whether we participate in your specific health plan and medical group.",
+              "Llame a nuestra oficina para que le ayudemos a verificar si participamos en su plan de seguro y grupo médico específicos."
+            )}
+          </p>
+          <Button asChild size="lg" className="mt-2 min-h-12 w-full bg-brand-red text-white hover:bg-brand-red/90 sm:w-auto">
+            <Link href="/insurances">
+              {t("View Insurance Information", "Consulte la información sobre seguros médicos")}
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* DOHC after-hours assistance (DOHC lines, clinic is not 24/7) */}
+      <DohcAssistance id="after-hours" />
 
       {/* Award Section: wording limited to what is printed on the plaque */}
       <section id="award" className="scroll-mt-24 bg-background">
@@ -298,54 +349,8 @@ export default function HomePage() {
       {/* Testimonials: intentionally removed. The previous quotes were invented.
           TODO(clinic): add real, consented patient reviews here (e.g., from Yelp) before publishing. */}
 
-      {/* Instagram Feed Teaser */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
-          <div className="mb-10 flex flex-col items-center gap-3 text-center">
-            <Instagram className="h-8 w-8 text-brand-red" />
-            <h2 className="text-3xl font-bold text-brand-navy">
-              {t("Follow Us on Instagram", "Siguenos en Instagram")}
-            </h2>
-            <p className="text-muted-foreground">
-              @paredesmedical
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {[1, 2, 3, 4].map((i) => (
-              <a
-                key={i}
-                href={SITE.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative aspect-square overflow-hidden rounded-xl bg-secondary"
-              >
-                <div className="flex h-full items-center justify-center text-muted-foreground transition-colors group-hover:text-brand-red">
-                  <Instagram className="h-10 w-10" />
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center bg-brand-navy/70 opacity-0 transition-opacity group-hover:opacity-100">
-                  <span className="text-sm font-semibold text-brand-warm-white">{t("View on Instagram", "Ver en Instagram")}</span>
-                </div>
-              </a>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <Button
-              asChild
-              variant="outline"
-              className="border-brand-red text-brand-red hover:bg-brand-red/5"
-            >
-              <a
-                href={SITE.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="mr-2 h-4 w-4" />
-                {t("Follow @paredesmedical", "Seguir @paredesmedical")}
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Instagram: office-approved posts only, official embed, curated (not an auto feed) */}
+      <InstagramCurated />
 
       {/* Map + Info */}
       <section className="bg-secondary">
@@ -360,7 +365,7 @@ export default function HomePage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Paredes Medical Corporation location"
+                title={t("Paredes Medical Corporation location", "Ubicación de Paredes Medical Corporation")}
               />
             </div>
             <div className="flex flex-col justify-center gap-6">
@@ -402,7 +407,7 @@ export default function HomePage() {
                 >
                   <a href={SITE.phoneHref}>
                     <Phone className="mr-2 h-4 w-4" />
-                    {t("Call to Schedule", "Llamar para Agendar")}
+                    {t("Call to Schedule", "Llame para agendar")}
                   </a>
                 </Button>
                 <Button
@@ -416,7 +421,7 @@ export default function HomePage() {
                     rel="noopener noreferrer"
                   >
                     <MapPin className="mr-2 h-4 w-4" />
-                    {t("Get Directions", "Obtener Direcciones")}
+                    {t("Get Directions", "Cómo llegar")}
                   </a>
                 </Button>
               </div>

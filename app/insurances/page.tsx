@@ -1,119 +1,90 @@
 "use client"
 
-import { Phone, ShieldCheck, AlertCircle } from "lucide-react"
+import { Phone } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { SITE } from "@/lib/site"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { ReviewPlaceholder } from "@/components/review-placeholder"
 
-// Lists copied exactly from paredesmedicalcorp.com/what-insurance-we-accept
-const commercialHmo = [
-  "Aetna",
-  "Blue Shield of California",
-  "Cigna",
-  "Covered California",
-  "Health Net",
-  "Molina Healthcare",
-  "UnitedHealthcare",
-]
-
-const medicareAdvantageHmo = [
-  "Aetna Medicare",
-  "Alignment Health Plan",
-  "Anthem Blue Cross",
-  "Astiva",
-  "Blue Shield",
-  "Health Net",
-  "Humana",
-  "Molina Healthcare",
-  "SCAN Health Plan",
-  "UnitedHealthcare",
-  "Wellcare",
-]
-
-function PlanGrid({ plans }: { plans: string[] }) {
-  return (
-    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {plans.map((name) => (
-        <Card key={name} className="border-0 shadow-sm">
-          <CardContent className="flex items-center gap-4 p-5">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-teal/10">
-              <ShieldCheck className="h-5 w-5 text-brand-teal" />
-            </div>
-            <span className="text-sm font-semibold text-brand-navy">{name}</span>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  )
-}
-
+// Copy from Diana's draft: Insurance EN (webpage2 p.5) / Seguros médicos ES (webpage1 p.5).
+// The old hardcoded HMO plan list was removed: Diana says it is stale and an official list
+// (or a link to DOHC's current accepted-plans page) is coming. Her note "mydohc.com/accepted
+// insurance" is not an exact URL, so no link is added until the exact URL is supplied.
 export default function InsurancesPage() {
   const { t } = useLanguage()
 
   return (
     <div className="flex flex-col">
-      {/* Page header */}
       <section className="bg-brand-navy">
         <div className="mx-auto max-w-7xl px-4 py-16 text-center md:py-20">
-          <h1 className="text-4xl font-bold text-brand-warm-white md:text-5xl">
-            {t("What Insurance We Accept", "Seguros Que Aceptamos")}
+          <h1 className="text-balance text-4xl font-bold text-brand-warm-white md:text-5xl">
+            {t("Insurance Information", "Información sobre seguros médicos")}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/70">
-            {t("We accept the following HMO plans.", "Aceptamos los siguientes planes HMO.")}
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-warm-white/80">
+            {t(
+              "Understanding your insurance should not stand in the way of getting care. Our team can help you check whether Paredes Medical Corporation participates in your specific health plan and medical group.",
+              "Comprender su seguro médico no debería ser un obstáculo para recibir atención. Nuestro equipo puede ayudarle a verificar si Paredes Medical Corporation participa en su plan de seguro y grupo médico específicos."
+            )}
           </p>
         </div>
       </section>
 
-      {/* HMO-only notice */}
       <section className="bg-background">
-        <div className="mx-auto max-w-4xl px-4 pt-12">
-          <div className="flex items-start gap-4 rounded-xl border-2 border-brand-red/30 bg-brand-red/5 p-6">
-            <AlertCircle className="mt-0.5 h-6 w-6 shrink-0 text-brand-red" />
-            <p className="font-semibold text-brand-navy">
+        <div className="mx-auto max-w-4xl px-4 py-14 md:py-16">
+          <h2 className="text-2xl font-bold text-brand-navy md:text-3xl">{t("Plans We Accept", "Seguros que aceptamos")}</h2>
+          <ReviewPlaceholder
+            className="mt-4"
+            en="Accepted plans: waiting for Diana's official list or the exact URL of DOHC's current accepted-insurance page. The previous plan list was removed because it is out of date."
+            es="Seguros aceptados: en espera de la lista oficial de Diana o de la dirección exacta de la página de seguros aceptados de DOHC. La lista anterior se eliminó porque está desactualizada."
+          />
+          <div className="mt-6 flex flex-col gap-4 leading-relaxed text-muted-foreground">
+            <p>
               {t(
-                "HMO plans only. At this time we are not accepting any PPO insurance plans.",
-                "Solo planes HMO. En este momento no estamos aceptando ningun plan de seguro PPO."
+                "Participation can vary by the specific plan or network, even when the insurance company's name is the same. Please call our office before your first visit or whenever your coverage changes.",
+                "La participación puede variar según el plan o la red, aunque el nombre de la compañía de seguros sea el mismo. Llame a nuestra oficina antes de su primera visita o cuando cambie su cobertura."
+              )}
+            </p>
+            <p>
+              {t(
+                "When you call, have your insurance card available so we can review the details with you. Your health plan can confirm your benefits, coverage, and any costs you may owe.",
+                "Al llamar, tenga a la mano su tarjeta de seguro para que podamos revisar los detalles con usted. Su plan de salud puede confirmar sus beneficios, cobertura y cualquier cantidad que le corresponda pagar."
+              )}
+            </p>
+          </div>
+
+          <h2 className="mt-10 text-2xl font-bold text-brand-navy md:text-3xl">
+            {t("Selecting Dr. Paredes as Your Primary Care Physician", "Cómo elegir al Dr. Paredes como su médico de cabecera")}
+          </h2>
+          <div className="mt-4 flex flex-col gap-4 leading-relaxed text-muted-foreground">
+            <p>
+              {t(
+                "Some health plans require you to select an assigned primary care physician, also called a PCP.",
+                "Algunos planes requieren que usted tenga un médico de atención primaria asignado, también conocido como PCP o médico de cabecera."
+              )}
+            </p>
+            <p>
+              {t(
+                "To select Dr. Paredes, contact your health plan's member services department using the number on your insurance card. Ask whether he is available through your specific plan and medical group and when the assignment will take effect.",
+                "Para elegir al Dr. Paredes, llame al departamento de servicios para miembros de su seguro, al número que aparece en su tarjeta. Pregunte si puede seleccionarlo a través de su plan y grupo médico específicos y a partir de qué fecha entraría en vigor la asignación."
               )}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Commercial HMO */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-12">
-          <h2 className="mb-6 text-2xl font-bold text-brand-navy md:text-3xl">
-            {t("Commercial HMO Plans", "Planes HMO Comerciales")}
-          </h2>
-          <PlanGrid plans={commercialHmo} />
-        </div>
-      </section>
-
-      {/* Medicare Advantage HMO */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 pb-16 md:pb-20">
-          <h2 className="mb-6 text-2xl font-bold text-brand-navy md:text-3xl">
-            {t("Medicare Advantage HMO Plans", "Planes HMO de Medicare Advantage")}
-          </h2>
-          <PlanGrid plans={medicareAdvantageHmo} />
-        </div>
-      </section>
-
-      {/* Call to verify */}
       <section className="bg-brand-teal">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-4 py-14 text-center text-accent-foreground">
-          <h2 className="text-3xl font-bold">{t("Questions About Your Plan?", "Preguntas Sobre Su Plan?")}</h2>
-          <p className="max-w-xl text-accent-foreground/80">
+          <h2 className="text-3xl font-bold">{t("Need Help Getting Started?", "¿Necesita ayuda para comenzar?")}</h2>
+          <p className="max-w-xl text-accent-foreground/90">
             {t(
-              "Call our office to confirm whether we accept your insurance.",
-              "Llame a nuestra oficina para confirmar si aceptamos su seguro."
+              `Call ${SITE.phoneDisplay}. Our team is happy to help.`,
+              `Llame al ${SITE.phoneDisplay}. Nuestro equipo con gusto le ayudará.`
             )}
           </p>
-          <Button asChild size="lg" className="bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
+          <Button asChild size="lg" className="min-h-12 bg-brand-red text-destructive-foreground hover:bg-brand-red/90">
             <a href={SITE.phoneHref}>
-              <Phone className="mr-2 h-5 w-5" />
-              {t("Call to Verify Coverage", "Llame para Verificar Cobertura")} {SITE.phoneDisplay}
+              <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
+              {t("Call", "Llame al")} {SITE.phoneDisplay}
             </a>
           </Button>
         </div>

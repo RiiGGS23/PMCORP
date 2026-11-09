@@ -10,12 +10,12 @@ import { Button } from "@/components/ui/button"
 
 const navItems = [
   { en: "Home", es: "Inicio", href: "/" },
-  { en: "About Us", es: "Sobre Nosotros", href: "/about" },
-  { en: "Our Doctor", es: "Nuestro Doctor", href: "/doctor" },
-  { en: "Meet Our Staff", es: "Nuestro Equipo", href: "/staff" },
+  { en: "About Us", es: "Conózcanos", href: "/about" },
+  { en: "Our Doctor", es: "Nuestro doctor", href: "/doctor" },
   { en: "Services", es: "Servicios", href: "/services" },
-  { en: "Insurances", es: "Seguros", href: "/insurances" },
-  { en: "Patient Resources", es: "Recursos", href: "/resources" },
+  { en: "Why Have a PCP?", es: "¿Por qué un PCP?", href: "/why-have-a-pcp" },
+  { en: "Insurance", es: "Seguros", href: "/insurances" },
+  { en: "Resources", es: "Recursos", href: "/resources" },
   { en: "Contact", es: "Contacto", href: "/contact" },
 ]
 
@@ -77,7 +77,7 @@ export function SiteHeader() {
           <Link href="/" className="flex shrink-0 items-center gap-3">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image-2-ibSP0N49cxu8BCwkukgSHX4euXwsrn.jpeg"
-              alt="Paredes Medical Corporation logo"
+              alt={t("Paredes Medical Corporation logo", "Logotipo de Paredes Medical Corporation")}
               width={60}
               height={60}
               className="h-12 w-auto md:h-14"
@@ -86,7 +86,7 @@ export function SiteHeader() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+          <nav className="hidden items-center gap-1 lg:flex" aria-label={t("Main navigation", "Navegación principal")}>
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -106,13 +106,13 @@ export function SiteHeader() {
             >
               <a href={SITE.phoneHref}>
                 <Phone className="mr-2 h-4 w-4" />
-                {t("Call to Schedule", "Llamar para Agendar")}
+                {t("Call to Schedule", "Llame para agendar")}
               </a>
             </Button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="flex h-12 w-12 items-center justify-center rounded-md text-foreground hover:bg-secondary lg:hidden"
-              aria-label={mobileOpen ? t("Close menu", "Cerrar menu") : t("Open menu", "Abrir menu")}
+              aria-label={mobileOpen ? t("Close menu", "Cerrar menú") : t("Open menu", "Abrir menú")}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"
             >
@@ -123,7 +123,7 @@ export function SiteHeader() {
 
         {/* Mobile nav */}
         {mobileOpen && (
-          <nav id="mobile-nav" className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-border bg-card px-4 pb-4 lg:hidden" aria-label="Mobile navigation">
+          <nav id="mobile-nav" className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-border bg-card px-4 pb-4 lg:hidden" aria-label={t("Mobile navigation", "Navegación móvil")}>
             {navItems.map((item) => (
               <Link
                 key={item.href}

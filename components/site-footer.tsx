@@ -17,7 +17,7 @@ export function SiteFooter() {
           <div className="flex flex-col gap-4">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-cWbg1C1VE2QyToXr7Gw7aY7C3ZC6X1.png"
-              alt="Paredes Medical Corporation logo"
+              alt={t("Paredes Medical Corporation logo", "Logotipo de Paredes Medical Corporation")}
               width={200}
               height={55}
               className="h-12 w-auto brightness-0 invert"
@@ -25,7 +25,7 @@ export function SiteFooter() {
             <p className="max-w-xs text-sm leading-relaxed text-brand-warm-white/70">
               {t(
                 "Providing compassionate, bilingual family medicine to the Coachella Valley community.",
-                "Brindando medicina familiar bilingue y compasiva a la comunidad del Valle de Coachella."
+                "Brindando medicina familiar bilingüe y compasiva a la comunidad del Valle de Coachella."
               )}
             </p>
             <a
@@ -33,7 +33,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex min-h-11 items-center gap-2 text-base text-brand-warm-white/70 transition-colors hover:text-brand-teal md:text-sm"
-              aria-label="Instagram"
+              aria-label={t("Instagram (opens in a new tab)", "Instagram (se abre en una pestaña nueva)")}
             >
               <Instagram className="h-5 w-5" />
               {SITE.instagramHandle}
@@ -43,10 +43,10 @@ export function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex min-h-11 items-center gap-2 text-base text-brand-warm-white/70 transition-colors hover:text-brand-teal md:text-sm"
-              aria-label="Yelp"
+              aria-label={t("Yelp (opens in a new tab)", "Yelp (se abre en una pestaña nueva)")}
             >
               <Star className="h-5 w-5" />
-              {t("Find us on Yelp", "Encuentrenos en Yelp")}
+              {t("Find us on Yelp", "Encuéntrenos en Yelp")}
             </a>
           </div>
 
@@ -57,13 +57,14 @@ export function SiteFooter() {
             </h3>
             <ul className="flex flex-col">
               {[
-                { en: "About Us", es: "Sobre Nosotros", href: "/about" },
-                { en: "Our Doctor", es: "Nuestro Doctor", href: "/doctor" },
-                { en: "Meet Our Staff", es: "Nuestro Equipo", href: "/staff" },
+                { en: "About Us", es: "Conózcanos", href: "/about" },
+                { en: "Our Doctor", es: "Nuestro doctor", href: "/doctor" },
                 { en: "Services", es: "Servicios", href: "/services" },
-                { en: "Accepted Insurances", es: "Seguros Aceptados", href: "/insurances" },
-                { en: "Patient Resources", es: "Recursos", href: "/resources" },
-                { en: "Contact", es: "Contacto", href: "/contact" },
+                { en: "Why Have a PCP?", es: "¿Por qué tener un médico de cabecera?", href: "/why-have-a-pcp" },
+                { en: "Insurance Information", es: "Información sobre seguros", href: "/insurances" },
+                { en: "Patient Resources", es: "Recursos para pacientes", href: "/resources" },
+                { en: "Contact & Location", es: "Contacto y ubicación", href: "/contact" },
+                { en: "Aesthetics", es: "Estética", href: "/aesthetics" },
               ].map((item) => (
                 <li key={item.href}>
                   <Link
@@ -115,14 +116,14 @@ export function SiteFooter() {
           {/* Hours */}
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-brand-teal">
-              {t("Office Hours", "Horario")}
+              {t("Office Hours", "Horario de atención")}
             </h3>
             <div className="flex items-start gap-2.5 text-sm text-brand-warm-white/70">
               <Clock className="mt-0.5 h-4 w-4 shrink-0" />
               <div>
                 <p>{t("Monday - Friday", "Lunes - Viernes")}</p>
                 <p className="font-semibold text-brand-warm-white">8:00 AM - 5:00 PM</p>
-                <p className="mt-1">{t("Saturday - Sunday", "Sabado - Domingo")}</p>
+                <p className="mt-1">{t("Saturday - Sunday", "Sábado - Domingo")}</p>
                 <p className="font-semibold text-brand-warm-white">{t("Closed", "Cerrado")}</p>
               </div>
             </div>
@@ -136,7 +137,7 @@ export function SiteFooter() {
           </p>
           <div className="flex flex-wrap justify-center gap-x-6 text-sm text-brand-warm-white/60">
             <Link href="/privacy" className="inline-flex min-h-11 items-center transition-colors hover:text-brand-warm-white">
-              {t("Privacy Policy", "Politica de Privacidad")}
+              {t("Privacy Policy", "Política de privacidad")}
             </Link>
             <Link href="/hipaa" className="inline-flex min-h-11 items-center transition-colors hover:text-brand-warm-white">
               {t("HIPAA Notice", "Aviso HIPAA")}
